@@ -93,7 +93,7 @@
 
   const emailNote = document.getElementById('contact-email-note');
   const emailLink = document.getElementById('contact-email-link');
-  const configuredEmail = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(CONTACT_EMAIL);
+  const configuredEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(CONTACT_EMAIL);
   if (configuredEmail && emailLink) {
     emailLink.href = 'mailto:' + CONTACT_EMAIL;
     emailLink.textContent = CONTACT_EMAIL;
