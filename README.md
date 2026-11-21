@@ -1,4 +1,4 @@
-# ClickFocus — site revisado (portfólio e captação por WhatsApp)
+# ClickFocus — (portfólio e captação por WhatsApp)
 
 Site estático HTML/CSS/JS, sem backend e independente do SITE123.
 
