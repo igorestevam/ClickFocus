@@ -1,5 +1,8 @@
 <div align="center">
-  <img src="assets/clickfocus-logo.svg" alt="Logotipo ClickFocus" width="540">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/clickfocus-logo-dark.svg">
+    <img src="assets/clickfocus-logo.svg" alt="Logotipo ClickFocus" width="540">
+  </picture>
   <p><strong>A atenção do seu cliente onde realmente importa.</strong></p>
   <p>Landing pages para apresentar pequenos negócios e facilitar o contato com potenciais clientes.</p>
 </div>
