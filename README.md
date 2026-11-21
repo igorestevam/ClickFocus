@@ -67,7 +67,8 @@ Quando um e-mail válido for informado, o endereço aparecerá na seção de con
 Horário confirmado para atendimento comercial por mensagens:
 
 - **Segunda a sexta:** das **12h às 19h** (horário de Brasília).
-- **Sábados, domingos e feriados:** sem horário fixo definido.
+- **Sábado:** das **11h às 14h** (horário de Brasília).
+- **Domingos e feriados:** sem horário fixo definido.
 
 Mensagens podem ser enviadas a qualquer momento, mas as respostas são realizadas conforme a disponibilidade durante o horário informado. O mesmo horário deve ser configurado no perfil do WhatsApp Business e, caso a rotina mude, atualizado aqui e na página. Não anunciamos atendimento 24 horas nem respostas imediatas.
 
