@@ -57,7 +57,13 @@ button{font-family:inherit}
 .cf-contact{display:grid;gap:38px}
 @media(min-width:1024px){.cf-contact{grid-template-columns:1.05fr .95fr;gap:64px;align-items:start}}
 .cf-footer__inner{display:grid;gap:34px}
-@media(min-width:768px){.cf-footer__inner{grid-template-columns:1.5fr 1fr 1fr}}
+@media(min-width:768px){.cf-footer__inner{grid-template-columns:1.3fr 1fr 1fr}}
+@media(min-width:1080px){.cf-footer__inner{grid-template-columns:1.3fr .75fr .85fr 1.6fr;column-gap:30px}}
+.cf-footer__contact .cf-footer__links{gap:12px}
+.cf-footer__contact .cf-footer__links a,.cf-footer__hours{display:flex;align-items:flex-start;gap:10px;overflow-wrap:anywhere;font-size:.88rem;line-height:1.65;color:var(--text-muted)}
+.cf-footer__contact .cf-footer__links a:hover{color:var(--text-color)}
+.cf-footer__contact .cf-footer__links i,.cf-footer__hours i{flex:0 0 18px;text-align:center;margin-top:4px;color:var(--secondary-color)}
+.cf-footer__hours{cursor:default}
 /* Scroll reveal; fallback is fully visible if JavaScript is disabled */
 .reveal{opacity:1;transform:none}
 .js-reveal .reveal{opacity:0;transform:translateY(26px);transition:opacity .75s cubic-bezier(.22,.61,.36,1),transform .75s cubic-bezier(.22,.61,.36,1)}
