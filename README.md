@@ -64,13 +64,12 @@ Quando um e-mail válido for informado, o endereço aparecerá na seção de con
 
 ### Horários de atendimento
 
-O horário público ainda aparece como **Em definição**, porque não há uma escala aprovada. **Sugestão inicial**, para facilitar a conciliação com outros compromissos:
+Horário confirmado para atendimento comercial por mensagens:
 
-- **Segunda a sexta:** das 18h às 20h;
-- **Sábado:** das 9h às 12h;
-- **Domingos e feriados:** sem atendimento regular.
+- **Segunda a sexta:** das **12h às 19h** (horário de Brasília).
+- **Sábados, domingos e feriados:** sem horário fixo definido.
 
-O atendimento pode receber mensagens a qualquer momento, mas o horário divulgado deve corresponder aos períodos em que você conseguirá responder. Confirme seus períodos antes de trocar o texto de `#contact-hours` em `index.html` e replique-os no WhatsApp Business (horário de Brasília). Não prometa disponibilidade 24 horas.
+Mensagens podem ser enviadas a qualquer momento, mas as respostas são realizadas conforme a disponibilidade durante o horário informado. O mesmo horário deve ser configurado no perfil do WhatsApp Business e, caso a rotina mude, atualizado aqui e na página. Não anunciamos atendimento 24 horas nem respostas imediatas.
 
 ## Identidade visual
 
