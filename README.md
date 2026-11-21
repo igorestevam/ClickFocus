@@ -16,8 +16,8 @@ A **ClickFocus** é uma iniciativa especializada na criação de landing pages p
 - Apresentação da marca, serviços e etapas de criação.
 - Portfólio com detalhes dos projetos e links para demonstração.
 - Perguntas frequentes sobre escopo, prazos, domínios e resultados.
-- Formulário de briefing para solicitação de orçamento pelo WhatsApp, após configuração.
-- Espaços reservados para WhatsApp Business, e-mail comercial e horário de atendimento.
+- Formulário de briefing para solicitação de orçamento pelo WhatsApp Business da ClickFocus.
+- Canais de contato publicados: WhatsApp Business, e-mail e horários de atendimento.
 - Design responsivo, menu mobile e componentes interativos.
 - Código independente do SITE123, com HTML, CSS e JavaScript puro.
 
@@ -36,31 +36,26 @@ A **ClickFocus** é uma iniciativa especializada na criação de landing pages p
 O site **não calcula preços nem envia propostas automaticamente**. O objetivo do formulário é organizar o briefing e direcionar o visitante ao atendimento.
 
 1. O visitante preenche nome, e-mail, telefone opcional, tipo de projeto e descrição.
-2. Com o WhatsApp configurado, o botão **Continuar no WhatsApp** abre a conversa com as informações preenchidas.
+2. O botão **Continuar no WhatsApp** abre uma conversa com as informações preenchidas para o número oficial **(27) 99224-9680**.
 3. **O próprio visitante precisa confirmar o envio da mensagem no WhatsApp**.
 4. O atendimento analisa a solicitação e envia uma proposta individual, incluindo escopo, prazo, valor, revisões e possíveis custos adicionais.
 
 O site **não recebe pagamentos nem possui backend ou banco de dados para salvar formulários**. Sem o WhatsApp configurado, o botão somente **copia o briefing** — nada é enviado à ClickFocus.
 
-### Configurar WhatsApp Business
+### Canais de contato configurados
 
-No início de `assets/app.js`, preencha a constante `WHATSAPP_BUSINESS` com o novo número, contendo apenas **DDI + DDD + número**, sem `+`, espaços ou traços.
+- **WhatsApp Business:** [(27) 99224-9680](https://wa.me/5527992249680)
+- **E-mail de contato:** [igorestevam1900@gmail.com](mailto:igorestevam1900@gmail.com)
+- **Site:** https://clickfocusbr.vercel.app/
 
-```js
-const WHATSAPP_BUSINESS = ''; // exemplo de formato: 5527999999999 (número ilustrativo)
-```
-
-Após configurar, teste o redirecionamento, o número de destino e o envio de uma mensagem real. O contato direto também aparecerá na seção **Canais de contato**.
-
-### Configurar o e-mail comercial
-
-No mesmo arquivo:
+Os dados oficiais estão concentrados no início de `assets/app.js`:
 
 ```js
-const CONTACT_EMAIL = ''; // exemplo ilustrativo: contato@seudominio.com
+const WHATSAPP_BUSINESS = '5527992249680'; // DDI + DDD + número
+const CONTACT_EMAIL = 'igorestevam1900@gmail.com';
 ```
 
-Quando um e-mail válido for informado, o endereço aparecerá na seção de contato como link `mailto:`. Até lá, o site mostra **Em preparação**, sem endereço inventado.
+O formulário abre o WhatsApp com um briefing preenchido, mas o visitante precisa **confirmar o envio** no aplicativo. O botão de WhatsApp e o endereço de e-mail também aparecem na área de contato. Revise estes dados sempre que mudar de número ou e-mail.
 
 ### Horários de atendimento
 
@@ -81,7 +76,7 @@ Mensagens podem ser enviadas a qualquer momento, mas as respostas são realizada
 Arquivos em `assets/`:
 - `clickfocus-logo.svg` — versão clara com a marca original, exibida neste README;
 - `clickfocus-logo-dark.svg` — versão adaptada para o fundo escuro do cabeçalho e do rodapé;
-- `favicon.svg` — ícone derivado da mesma marca.
+- `favicon.svg` — ícone derivado da mesma marca, com **fundo transparente** e contraste adaptado ao tema do navegador.
 
 ## Rodar localmente
 

@@ -1,9 +1,8 @@
 (() => {
   'use strict';
-  // Ative após a configuração do número comercial, usando DDI+DDD+número, sem sinais.
-  const WHATSAPP_BUSINESS = '';
-  // Informe apenas quando o e-mail comercial tiver sido criado.
-  const CONTACT_EMAIL = '';
+  // Contatos oficiais da ClickFocus (DDI + DDD + número para o WhatsApp).
+  const WHATSAPP_BUSINESS = '5527992249680';
+  const CONTACT_EMAIL = 'igorestevam1900@gmail.com';
 
   const header = document.getElementById('site-header');
   const toggle = document.getElementById('menu-toggle');
@@ -112,7 +111,7 @@
   if (activeBusiness && waLink) {
     waLink.hidden = false;
     waLink.href = 'https://wa.me/' + WHATSAPP_BUSINESS + '?text=' + encodeURIComponent('Olá! Encontrei a ClickFocus pelo site e gostaria de pedir um orçamento.');
-    if (waNote) waNote.textContent = 'Nosso WhatsApp está disponível para receber seu contato.';
+    if (waNote) waNote.textContent = 'Atendimento pelo número (27) 99224-9680. Envie sua mensagem pelo botão abaixo.';
   }
 
   const form = document.getElementById('contact-form');
