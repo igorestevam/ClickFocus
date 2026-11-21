@@ -2,6 +2,8 @@
   'use strict';
   // Ative após a configuração do número comercial, usando DDI+DDD+número, sem sinais.
   const WHATSAPP_BUSINESS = '';
+  // Informe apenas quando o e-mail comercial tiver sido criado.
+  const CONTACT_EMAIL = '';
 
   const header = document.getElementById('site-header');
   const toggle = document.getElementById('menu-toggle');
@@ -89,6 +91,15 @@
     if (panel) panel.hidden = !nowOpen;
   }));
 
+  const emailNote = document.getElementById('contact-email-note');
+  const emailLink = document.getElementById('contact-email-link');
+  const configuredEmail = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(CONTACT_EMAIL);
+  if (configuredEmail && emailLink) {
+    emailLink.href = 'mailto:' + CONTACT_EMAIL;
+    emailLink.textContent = CONTACT_EMAIL;
+    emailLink.hidden = false;
+    if (emailNote) emailNote.hidden = true;
+  }
   const waLink = document.getElementById('whatsapp-link');
   const waNote = document.getElementById('whatsapp-note');
   const activeBusiness = /^\d{12,13}$/.test(WHATSAPP_BUSINESS);
@@ -101,7 +112,7 @@
   if (activeBusiness && waLink) {
     waLink.hidden = false;
     waLink.href = 'https://wa.me/' + WHATSAPP_BUSINESS + '?text=' + encodeURIComponent('Olá! Encontrei a ClickFocus pelo site e gostaria de pedir um orçamento.');
-    if (waNote) waNote.textContent = 'Prefere conversar pelo WhatsApp?';
+    if (waNote) waNote.textContent = 'Nosso WhatsApp está disponível para receber seu contato.';
   }
 
   const form = document.getElementById('contact-form');
