@@ -104,12 +104,12 @@ Abra [http://localhost:8000](http://localhost:8000) ou abra `index.html` diretam
 
 ## Página de links para a bio do Instagram
 
-A ClickFocus também oferece uma página independente em [**clickfocusbr.vercel.app/links**](https://clickfocusbr.vercel.app/links), criada em `links/index.html` e estilizada por `links/links.css`. Ela reúne **WhatsApp Business, site oficial, portfólio demonstrativo e e-mail**.
+A ClickFocus também oferece uma página independente em [**clickfocusbr.vercel.app/links**](https://clickfocusbr.vercel.app/links), servida por `links.html` usando `assets/links-bio.css`, com rota `/links` configurada em `vercel.json` e cópia de compatibilidade em `links/index.html`. Ela reúne **WhatsApp Business, site oficial, portfólio demonstrativo e e-mail**.
 
 - **Importante:** não há botão ou link da landing page principal (`index.html`) para essa página. Ela existe apenas como destino do link colocado na bio ou compartilhado diretamente.
 - A URL é pública para quem a conhece; **não é uma página protegida por senha nem limitada tecnicamente a cliques do Instagram**. O `noindex,nofollow` é apenas uma solicitação aos mecanismos de busca, não um controle de acesso.
 - Para adicionar ou remover opções no futuro, edite as âncoras dentro de `<nav class="links-list">` em `links/index.html` e publique normalmente pelo GitHub/Vercel.
-- O visual usa a identidade da ClickFocus e os mesmos arquivos de logo/favicons oficiais, em caminhos relativos (`../assets/`).
+- O visual usa a identidade da ClickFocus e os mesmos arquivos oficiais de logo/favicon, referenciados por caminhos absolutos (`/assets/`) para funcionar em `/links` e `/links/`.
 - Os links de site e portfólio apontam para o domínio atual `https://clickfocusbr.vercel.app/`, e podem ser atualizados se o endereço mudar.
 
 ## Publicação e responsabilidade comercial

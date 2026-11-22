@@ -1,0 +1,82 @@
+:root {
+  color-scheme: dark;
+  --bg: #0B0B10;
+  --surface: #13121E;
+  --text: #F6F5FA;
+  --muted: #B6B1C3;
+  --purple: #8B3DFF;
+  --outline: rgba(177, 138, 246, 0.32);
+  --font-body: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { min-height: 100%; background: var(--bg); -webkit-text-size-adjust: 100%; }
+body { min-height: 100vh; min-height: 100dvh; margin: 0; color: var(--text); background: var(--bg); font-family: var(--font-body); }
+a { color: inherit; }
+a:focus-visible { outline: 3px solid #C29CFF; outline-offset: 4px; }
+.sr-only { position: absolute; height: 1px; width: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.links-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(34px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  background:
+    radial-gradient(ellipse 460px 320px at 50% 12%, rgba(139,61,255,.22), transparent 75%),
+    radial-gradient(ellipse 300px 250px at 95% 85%, rgba(92,35,187,.13), transparent 75%),
+    #0B0B10;
+}
+.links-card { width: 100%; max-width: 500px; padding: 16px 0 8px; }
+.links-brand { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.links-avatar {
+  width: 92px; height: 92px;
+  display: grid; place-items: center;
+  border: 1px solid rgba(160,101,255,.48);
+  border-radius: 27px;
+  background: linear-gradient(140deg, rgba(139,61,255,.27), rgba(19,18,30,.92) 72%);
+  box-shadow: 0 15px 48px -25px rgba(139,61,255,.98), inset 0 0 28px rgba(139,61,255,.07);
+}
+.links-avatar img { width: 56px; height: 56px; object-fit: contain; }
+.links-logo { display: block; width: 204px; max-width: 65%; height: auto; margin-top: 22px; }
+.links-tagline { max-width: 380px; margin: 14px 0 0; font: 600 clamp(17px, 4vw, 21px)/1.35 var(--font-display); letter-spacing: -.035em; }
+.links-description { max-width: 390px; margin: 12px 8px 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.links-list { display: grid; gap: 13px; margin: 34px 0 0; }
+.links-button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 27px 1fr 18px;
+  align-items: center;
+  gap: 13px;
+  min-height: 64px;
+  padding: 15px 20px;
+  border: 1px solid var(--outline);
+  border-radius: 17px;
+  background: rgba(23,21,34,.84);
+  text-decoration: none;
+  font: 600 14px/1.4 var(--font-display);
+  transition: border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.links-button:hover { transform: translateY(-2px); background: rgba(39,27,61,.95); border-color: rgba(184,145,255,.65); box-shadow: 0 12px 30px -22px rgba(139,61,255,.9); }
+.links-button:active { transform: translateY(0); }
+.links-button--primary { border-color: #9D5CFF; background: linear-gradient(100deg, #8030EB, #8B3DFF); box-shadow: 0 12px 38px -21px rgba(139,61,255,.97); }
+.links-button--primary:hover { background: linear-gradient(100deg, #944CFA, #9B54FF); }
+.links-button__icon { width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; }
+.links-button__icon svg { width: 24px; height: 24px; }
+.links-button__arrow { font-size: 17px; opacity: .85; }
+.links-help { margin: 24px 12px 0; text-align: center; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.links-hours { display: flex; justify-content: center; align-items: baseline; gap: 9px; padding: 14px 0 0; color: var(--muted); }
+.links-hours__dot { flex: 0 0 auto; height: 7px; width: 7px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 12px var(--purple); }
+.links-hours p { margin: 0; font-size: 11.5px; line-height: 1.6; }
+.links-hours strong { color: var(--text); font-weight: 600; }
+.links-footer { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 31px; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.1); }
+.links-footer p { margin: 0; text-align: center; color: #908A9B; font-size: 11px; line-height: 1.6; }
+@media (max-width: 380px) {
+  .links-page { padding-inline: 15px; }
+  .links-button { gap: 10px; padding: 14px 14px; font-size: 13px; }
+  .links-description { font-size: 13px; }
+  .links-hours { align-items: start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
