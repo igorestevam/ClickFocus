@@ -1,533 +1,714 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<!-- Regular Meta Info -->
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>ClickFocus — landing pages que capturam atenção</title>
 <meta content="A ClickFocus cria landing pages para pequenos negócios: estrutura clara, design responsivo e integração de contato conforme o projeto. Conheça nosso portfólio demonstrativo." name="description"/>
-<link href="assets/site.css" rel="stylesheet"/><meta content="ClickFocus — landing pages que capturam atenção" property="og:title"/><meta content="Landing pages modernas para pequenos negócios. A atenção do seu cliente onde realmente importa." property="og:description"/><link href="assets/favicon.svg?v=2" rel="icon" type="image/svg+xml"/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/></head>
+<meta content="ClickFocus — landing pages que capturam atenção" property="og:title"/>
+<meta content="Landing pages modernas para pequenos negócios. A atenção do seu cliente onde realmente importa." property="og:description"/>
+<meta content="#07070B" name="theme-color"/>
+<link href="assets/favicon.svg?v=2" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Manrope:wght@500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
+<link href="assets/site.css?v=3" rel="stylesheet"/>
+<script>
+  document.documentElement.classList.add('js');
+  // Segurança: se o script principal não carregar, o conteúdo volta a ficar visível.
+  setTimeout(function () { if (!window.__cf) document.documentElement.classList.remove('js'); }, 3500);
+</script>
+</head>
 <body>
-<header class="cf-header" id="site-header">
-<div class="cf-container cf-header__inner">
-<a aria-label="ClickFocus — ir para o início" class="cf-logo" href="#top">
-<img class="cf-logo__image" src="assets/clickfocus-logo-dark.svg" alt="ClickFocus" width="206" height="40" decoding="async"/>
-</a>
-<nav aria-label="Navegação principal" class="cf-nav">
-<a class="cf-nav__link" href="#sobre">Sobre</a>
-<a class="cf-nav__link" href="#servicos">Serviços</a>
-<a class="cf-nav__link" href="#portfolio">Portfólio</a>
-<a class="cf-nav__link" href="#processo">Como funciona</a>
-<a class="cf-nav__link" href="#faq">FAQ</a>
-</nav>
-<div class="cf-header__actions">
-<a class="cf-btn cf-btn--primary cf-btn--sm cf-header__cta" href="#contato">Solicitar orçamento</a>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu" class="cf-burger" id="menu-toggle" type="button">
-<span></span>
-<span></span>
-</button>
-</div>
-</div>
-<div class="cf-mobile-menu" id="mobile-menu">
-<nav aria-label="Navegação mobile" class="cf-container cf-mobile-menu__inner">
-<a class="cf-mobile-menu__link" href="#sobre">Sobre</a>
-<a class="cf-mobile-menu__link" href="#servicos">Serviços</a>
-<a class="cf-mobile-menu__link" href="#portfolio">Portfólio</a>
-<a class="cf-mobile-menu__link" href="#processo">Como funciona</a>
-<a class="cf-mobile-menu__link" href="#faq">Perguntas frequentes</a>
-<a class="cf-mobile-menu__link" href="#contato">Contato</a>
-<a class="cf-btn cf-btn--primary" href="#contato">Solicitar orçamento</a>
-</nav>
-</div>
+<a class="skip" href="#sobre">Pular para o conteúdo</a>
+<div aria-hidden="true" class="grain"></div>
+<div aria-hidden="true" class="progress"><span id="scroll-progress"></span></div>
+<div aria-hidden="true" class="cursor" id="cursor"><i></i><i></i><i></i><i></i><span class="cursor__label" id="cursor-label"></span></div>
+<div aria-hidden="true" class="cursor-dot" id="cursor-dot"></div>
+
+<header class="hdr" id="site-header">
+  <div class="hdr__pill">
+    <a aria-label="ClickFocus — ir para o início" class="hdr__logo" href="#top">
+      <img alt="ClickFocus" decoding="async" height="40" src="assets/clickfocus-logo-dark.svg" width="206"/>
+    </a>
+    <nav aria-label="Navegação principal" class="hdr__nav">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#processo">Como funciona</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn--primary btn--sm hdr__cta" data-magnetic="" href="#contato">Solicitar orçamento</a>
+    <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu" class="burger" id="menu-toggle" type="button"><span></span><span></span></button>
+  </div>
 </header>
+
+<div aria-hidden="true" class="menu" id="mobile-menu">
+  <nav aria-label="Navegação mobile" class="menu__nav">
+    <a href="#sobre"><small>01</small>Sobre</a>
+    <a href="#servicos"><small>03</small>Serviços</a>
+    <a href="#portfolio"><small>04</small>Portfólio</a>
+    <a href="#processo"><small>05</small>Como funciona</a>
+    <a href="#faq"><small>06</small>Perguntas frequentes</a>
+    <a href="#contato"><small>07</small>Contato</a>
+  </nav>
+  <div class="menu__foot">
+    <a class="btn btn--primary btn--lg" href="#contato">Solicitar orçamento <i aria-hidden="true" class="fa-solid fa-arrow-right"></i></a>
+    <a class="menu__wa" href="https://wa.me/5527992249680?text=Ol%C3%A1%21%20Encontrei%20a%20ClickFocus%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." rel="noopener noreferrer" target="_blank"><i aria-hidden="true" class="fa-brands fa-whatsapp"></i>(27) 99224-9680</a>
+  </div>
+</div>
+
 <main id="top">
-<section aria-labelledby="hero-title" class="cf-hero">
-<span aria-hidden="true" class="cf-hero__glow"></span>
-<div class="cf-container cf-hero__grid">
-<div class="cf-hero__copy">
-<p class="cf-eyebrow reveal">A atenção do seu cliente onde realmente importa.</p>
-<h1 class="cf-h1 reveal" id="hero-title">Sua marca merece ser o <span class="cf-gradient-text">centro das atenções.</span></h1>
-<p class="cf-lead reveal">Criamos landing pages para apresentar seu negócio com clareza, destacar seus serviços e facilitar o primeiro contato com seus potenciais clientes.</p>
-<div class="cf-hero__actions reveal">
-<a class="cf-btn cf-btn--primary cf-btn--lg" href="#contato">Solicitar orçamento <i aria-hidden="true" class="fa-solid fa-arrow-right"></i></a>
-<a class="cf-btn cf-btn--ghost cf-btn--lg" href="#portfolio">Ver portfólio</a>
-</div>
-<ul class="cf-hero__tags reveal">
-<li class="cf-tag"><i aria-hidden="true" class="fa-solid fa-crosshairs"></i><span>Foco no contato</span></li>
-<li class="cf-tag"><i aria-hidden="true" class="fa-solid fa-mobile-screen"></i><span>Mobile-first</span></li>
-<li class="cf-tag"><i aria-hidden="true" class="fa-solid fa-feather"></i><span>Design minimalista</span></li>
-</ul>
-</div>
-<div aria-hidden="true" class="cf-showcase reveal">
-<div class="cf-showcase__frame">
-<div class="cf-showcase__top">
-<span></span><span></span><span></span>
-<em>Exemplo de landing page</em>
-</div>
-<div class="cf-showcase__screen">
-<div class="cf-skel cf-skel--brand"></div>
-<div class="cf-skel cf-skel--xl"></div>
-<div class="cf-skel cf-skel--lg"></div>
-<div class="cf-skel cf-skel--md"></div>
-<div class="cf-showcase__pill">Solicitar orçamento</div>
-<div class="cf-showcase__row">
-<div class="cf-showcase__tile"></div>
-<div class="cf-showcase__tile"></div>
-</div>
-</div>
-</div>
-<span class="cf-showcase__tag">Design responsivo</span>
-</div>
-</div>
+
+<!-- ============ HERO ============ -->
+<section aria-labelledby="hero-title" class="hero" id="hero">
+  <canvas aria-hidden="true" class="hero__field" id="focus-field"></canvas>
+  <div aria-hidden="true" class="hero__glow"></div>
+  <div aria-hidden="true" class="hero__vignette"></div>
+  <div aria-hidden="true" class="hud">
+    <span class="hud__item hud__item--tl"><i class="hud__rec"></i>Foco ativo</span>
+    <span class="hud__item hud__item--tr">AF · 1 objetivo por página</span>
+    <span class="hud__item hud__item--bl" id="hud-coords">X 0000 · Y 0000</span>
+    <span class="hud__item hud__item--br">Role para explorar <b class="hud__scroll"></b></span>
+  </div>
+  <div class="wrap hero__inner">
+    <p class="hero__kicker"><span class="hero__kdot"></span>Landing pages para pequenos negócios</p>
+    <h1 class="hero__title" id="hero-title">
+      <span class="hl"><span class="hl__in">Sua marca no</span></span>
+      <span class="hl"><span class="hl__in"><span class="lock"><em>centro</em><span aria-hidden="true" class="lock__frame"><i></i><i></i><i></i><i></i></span><span aria-hidden="true" class="lock__tag">Foco</span></span> das</span></span>
+      <span class="hl"><span class="hl__in">atenções<span class="hero__dot">.</span></span></span>
+    </h1>
+    <div class="hero__foot">
+      <p class="hero__lead">Criamos landing pages para apresentar seu negócio com clareza, destacar seus serviços e facilitar o primeiro contato com seus potenciais clientes.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" data-magnetic="" href="#contato">Solicitar orçamento <i aria-hidden="true" class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn btn--ghost btn--lg" data-magnetic="" href="#portfolio">Ver portfólio</a>
+      </div>
+    </div>
+  </div>
 </section>
-<section aria-labelledby="sobre-title" class="cf-section" id="sobre">
-<div class="cf-container cf-about">
-<div class="cf-about__intro">
-<p class="cf-eyebrow reveal">Sobre a ClickFocus</p>
-<h2 class="cf-h2 reveal" id="sobre-title">Uma proposta simples: colocar seu negócio em destaque, sem distrações.</h2>
-<p class="cf-text reveal">A ClickFocus é uma marca dedicada à criação de landing pages para pequenos negócios. Nosso foco é organizar as informações mais importantes em uma página com objetivo claro e navegação simples.</p>
-<p class="cf-text reveal">Cada proposta considera o tipo de negócio, o público e os materiais disponíveis. A identidade visual e as funcionalidades são definidas de acordo com o escopo combinado.</p>
-<a class="cf-btn cf-btn--ghost reveal" href="#servicos">Ver o que fazemos</a>
+
+<!-- ============ TICKER ============ -->
+<div aria-hidden="true" class="ticker">
+  <div class="ticker__inner" id="ticker">
+    <div class="ticker__track">
+      <span>Clareza</span><b class="xh"></b><span class="o">Foco no contato</span><b class="xh"></b><span>Mobile-first</span><b class="xh"></b><span class="o">Direção visual</span><b class="xh"></b><span>Copy estratégica</span><b class="xh"></b><span class="o">Uma ação por página</span><b class="xh"></b>
+      <span>Clareza</span><b class="xh"></b><span class="o">Foco no contato</span><b class="xh"></b><span>Mobile-first</span><b class="xh"></b><span class="o">Direção visual</span><b class="xh"></b><span>Copy estratégica</span><b class="xh"></b><span class="o">Uma ação por página</span><b class="xh"></b>
+    </div>
+  </div>
 </div>
-<div class="cf-about__principles">
-<article class="cf-principle reveal">
-<span class="cf-principle__num">01</span>
-<h3>Clareza antes do enfeite</h3>
-<p class="cf-text">Organizamos as seções para que o visitante encontre informações úteis e entenda como entrar em contato.</p>
-</article>
-<article class="cf-principle reveal">
-<span class="cf-principle__num">02</span>
-<h3>Uma ação por página</h3>
-<p class="cf-text">Os botões e conteúdos são organizados em torno da ação principal escolhida para a página.</p>
-</article>
-<article class="cf-principle reveal">
-<span class="cf-principle__num">03</span>
-<h3>Pensada para o celular</h3>
-<p class="cf-text">O layout se adapta a diferentes tamanhos de tela, com textos legíveis e botões acessíveis.</p>
-</article>
-</div>
-</div>
+
+<!-- ============ SOBRE / MANIFESTO ============ -->
+<section aria-labelledby="sobre-title" class="sec about" id="sobre">
+  <div class="wrap">
+    <p class="label rv"><span>01</span>Sobre a ClickFocus</p>
+    <div class="manifesto" data-manifesto="">
+      <h2 id="sobre-title">Uma proposta simples: colocar seu negócio em destaque, <em>sem distrações.</em></h2>
+      <p>Enquanto muitas páginas disputam o olhar com excesso de banners, botões e avisos, a ClickFocus organiza o que importa, retira o que distrai e conduz o visitante até uma ação clara: <em>falar com você.</em></p>
+    </div>
+    <div class="about__grid">
+      <div class="about__text">
+        <p class="text rv">A ClickFocus é uma marca dedicada à criação de landing pages para pequenos negócios. Nosso foco é organizar as informações mais importantes em uma página com objetivo claro e navegação simples.</p>
+        <p class="text rv">Cada proposta considera o tipo de negócio, o público e os materiais disponíveis. A identidade visual e as funcionalidades são definidas de acordo com o escopo combinado.</p>
+        <a class="btn btn--ghost rv" data-magnetic="" href="#servicos">Ver o que fazemos <i aria-hidden="true" class="fa-solid fa-arrow-down"></i></a>
+      </div>
+      <ol class="principles">
+        <li class="principle rv">
+          <span class="principle__num">01</span>
+          <div><h3>Clareza antes do enfeite</h3><p>Organizamos as seções para que o visitante encontre informações úteis e entenda como entrar em contato.</p></div>
+        </li>
+        <li class="principle rv">
+          <span class="principle__num">02</span>
+          <div><h3>Uma ação por página</h3><p>Os botões e conteúdos são organizados em torno da ação principal escolhida para a página.</p></div>
+        </li>
+        <li class="principle rv">
+          <span class="principle__num">03</span>
+          <div><h3>Pensada para o celular</h3><p>O layout se adapta a diferentes tamanhos de tela, com textos legíveis e botões acessíveis.</p></div>
+        </li>
+      </ol>
+    </div>
+  </div>
 </section>
-<section aria-labelledby="servicos-title" class="cf-section" id="servicos">
-<div class="cf-container">
-<div class="cf-section__head">
-<p class="cf-eyebrow reveal">Serviços</p>
-<h2 class="cf-h2 reveal" id="servicos-title">Serviços para criar uma página clara e bem apresentada.</h2>
-<p class="cf-lead reveal">Da organização do conteúdo à publicação, com recursos definidos conforme a necessidade do projeto.</p>
-</div>
-<div class="cf-services">
-<article class="cf-card reveal">
-<span class="cf-service__icon"><i aria-hidden="true" class="fa-solid fa-wand-magic-sparkles"></i></span>
-<h3 class="cf-h3">Landing pages sob medida</h3>
-<p class="cf-text">Adaptamos a estrutura, os textos e as seções ao objetivo e aos materiais de cada negócio.</p>
-</article>
-<article class="cf-card reveal">
-<span class="cf-service__icon"><i aria-hidden="true" class="fa-solid fa-pen-nib"></i></span>
-<h3 class="cf-h3">Direção visual</h3>
-<p class="cf-text">Paleta, tipografia e detalhes que alinham a página ao posicionamento da sua marca.</p>
-</article>
-<article class="cf-card reveal">
-<span class="cf-service__icon"><i aria-hidden="true" class="fa-solid fa-comments"></i></span>
-<h3 class="cf-h3">Copy estratégica</h3>
-<p class="cf-text">Ajudamos a organizar e revisar textos de apresentação, benefícios e chamadas para contato.</p>
-</article>
-<article class="cf-card reveal">
-<span class="cf-service__icon"><i aria-hidden="true" class="fa-solid fa-mobile-screen"></i></span>
-<h3 class="cf-h3">Experiência mobile</h3>
-<p class="cf-text">Layout adaptável a celulares, tablets e computadores.</p>
-</article>
-<article class="cf-card reveal">
-<span class="cf-service__icon"><i aria-hidden="true" class="fa-solid fa-gauge-high"></i></span>
-<h3 class="cf-h3">Organização e boas práticas</h3>
-<p class="cf-text">Estrutura com hierarquia de conteúdo, atenção à acessibilidade e práticas de otimização.</p>
-</article>
-<article class="cf-card reveal">
-<span class="cf-service__icon"><i aria-hidden="true" class="fa-solid fa-rocket"></i></span>
-<h3 class="cf-h3">Publicação e ajustes</h3>
-<p class="cf-text">A publicação, a configuração do domínio e a quantidade de ajustes são combinadas na proposta.</p>
-</article>
-</div>
-</div>
+
+<!-- ============ COMPARADOR ============ -->
+<section aria-labelledby="compare-title" class="sec compare" id="diferenca">
+  <div class="wrap">
+    <div class="sec__head sec__head--split">
+      <div>
+        <p class="label rv"><span>02</span>A diferença</p>
+        <h2 class="h2" data-split="" id="compare-title">Arraste e veja o que o <em>foco</em> faz com uma página.</h2>
+      </div>
+      <p class="lead rv">A mesma informação, primeiro disputando atenção com tudo ao redor, depois organizada em torno de uma única ação.</p>
+    </div>
+    <div class="cmp rv" data-cursor-label="Arraste" id="compare" style="--pos:50%">
+      <!-- Lado sem foco -->
+      <div aria-hidden="true" class="cmp__pane noise">
+        <div class="noise__bar"><span>PROMOÇÃO IMPERDÍVEL ★ ÚLTIMOS DIAS ★ CONFIRA ★ PROMOÇÃO IMPERDÍVEL ★ ÚLTIMOS DIAS ★ CONFIRA ★</span></div>
+        <div class="noise__nav"><b>FORNO AURORA</b><span>Início</span><span>Quem somos</span><span>Produtos</span><span>Promoções</span><span>Blog</span><span>Galeria</span><span>Notícias</span><span>Contato</span></div>
+        <div class="noise__body">
+          <p class="noise__h">BEM-VINDO AO NOSSO SITE!!!</p>
+          <p class="noise__p">Somos uma empresa que trabalha com qualidade, compromisso e excelência para oferecer o melhor para você e sua família, com produtos variados, preços especiais e muito mais. Confira abaixo todas as nossas novidades e não perca!</p>
+          <div class="noise__btns"><span class="nb1">CLIQUE AQUI</span><span class="nb2">SAIBA MAIS</span><span class="nb3">VER PROMOÇÕES</span><span class="nb4">FALE CONOSCO</span><span class="nb5">BAIXAR CATÁLOGO</span></div>
+          <div class="noise__grid"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="noise__pop"><b>ASSINE NOSSA NEWSLETTER!</b><span>Receba ofertas toda semana</span><em>✕</em></div>
+        <span class="noise__sticker">NOVO!</span>
+        <div class="noise__cookie">Este site usa cookies. <b>OK</b><b>Configurar</b><b>Saiba mais</b></div>
+        <span class="noise__chat">?</span>
+      </div>
+      <!-- Lado com foco -->
+      <div aria-hidden="true" class="cmp__pane focus">
+        <div class="focus__nav"><b>Forno Aurora</b><span>Encomendar</span></div>
+        <div class="focus__hero">
+          <div class="focus__copy">
+            <p class="focus__k">Padaria artesanal de bairro</p>
+            <p class="focus__h">Pão de fermentação natural, saindo do forno toda manhã.</p>
+            <p class="focus__p">Encomende pelo WhatsApp e retire no horário que preferir.</p>
+            <span class="focus__cta">Fazer encomenda →</span>
+          </div>
+          <div class="focus__art"><span class="focus__sun"></span><span class="focus__loaf"></span></div>
+        </div>
+      </div>
+      <div aria-hidden="true" class="cmp__handle"><span><i class="fa-solid fa-arrows-left-right"></i></span></div>
+      <span aria-hidden="true" class="cmp__tag cmp__tag--l">Sem foco</span>
+      <span aria-hidden="true" class="cmp__tag cmp__tag--r">Com foco</span>
+      <input aria-label="Comparar: mover para a esquerda mostra a página com foco, para a direita a página sem foco" class="cmp__range" max="100" min="0" type="range" value="50"/>
+    </div>
+    <p class="small cmp__note">Ilustração criada para fins de comparação. “Forno Aurora” é um negócio fictício.</p>
+  </div>
 </section>
-<section aria-labelledby="portfolio-title" class="cf-section" id="portfolio">
-<div class="cf-container">
-<div class="cf-section__head cf-section__head--center">
-<p class="cf-eyebrow reveal">Portfólio</p>
-<h2 class="cf-h2 reveal" id="portfolio-title">Três estilos para diferentes tipos de negócio.</h2>
-<p class="cf-lead reveal">Serena Estética, Black Crown e VOLT são projetos conceituais do portfólio ClickFocus — não são trabalhos contratados por clientes reais.</p>
-</div>
-<div class="cf-works">
-<article class="cf-work reveal" style="transition-delay: 0ms">
-<div class="cf-work__frame">
-<div class="cf-work__bar"><span></span><span></span><span></span></div>
-<div class="cf-work__screen cf-mock cf-mock--serena">
-<div class="cf-mock__top">
-<span class="cf-mock__brand">Serena</span>
-<span class="cf-mock__nav"><i></i><i></i><i></i></span>
-</div>
-<div class="cf-mock__body">
-<p class="cf-mock__kicker">Beleza que respeita o tempo</p>
-<p class="cf-mock__headline">Cuidado que se nota no primeiro olhar.</p>
-<span class="cf-mock__cta">Agendar avaliação</span>
-</div>
-</div>
-</div><p class="cf-small cf-preview-note">Prévia ilustrativa do conceito.</p>
-<div class="cf-work__body">
-<p class="cf-work__tag">Estética facial e corporal</p>
-<h3 class="cf-work__title">Serena Estética</h3>
-<p class="cf-work__desc">Conceito de landing page para estética, com tipografia serifada, tons claros e verde-sálvia, pensado para transmitir acolhimento.</p>
-<button aria-haspopup="dialog" class="cf-link-btn" data-project="serena" type="button">
-                        Ver projeto <i aria-hidden="true" class="fa-solid fa-arrow-right"></i>
-</button>
-</div>
-</article>
-<article class="cf-work reveal" style="transition-delay: 90ms">
-<div class="cf-work__frame">
-<div class="cf-work__bar"><span></span><span></span><span></span></div>
-<div class="cf-work__screen cf-mock cf-mock--crown">
-<div class="cf-mock__top">
-<span class="cf-mock__brand">Black Crown</span>
-<span class="cf-mock__nav"><i></i><i></i><i></i></span>
-</div>
-<div class="cf-mock__body">
-<p class="cf-mock__kicker">Corte, navalha e ritual</p>
-<p class="cf-mock__headline">O padrão de excelência em cada detalhe.</p>
-<span class="cf-mock__cta">Agendar horário</span>
-</div>
-</div>
-</div><p class="cf-small cf-preview-note">Prévia ilustrativa do conceito.</p>
-<div class="cf-work__body">
-<p class="cf-work__tag">Barbearia premium</p>
-<h3 class="cf-work__title">Black Crown Barber Studio</h3>
-<p class="cf-work__desc">Preto profundo, dourado discreto e tipografia forte para uma barbearia que vende experiência, não apenas corte.</p>
-<button aria-haspopup="dialog" class="cf-link-btn" data-project="black-crown" type="button">
-                        Ver projeto <i aria-hidden="true" class="fa-solid fa-arrow-right"></i>
-</button>
-</div>
-</article>
-<article class="cf-work reveal" style="transition-delay: 180ms">
-<div class="cf-work__frame">
-<div class="cf-work__bar"><span></span><span></span><span></span></div>
-<div class="cf-work__screen cf-mock cf-mock--volt">
-<div class="cf-mock__top">
-<span class="cf-mock__brand">VOLT</span>
-<span class="cf-mock__nav"><i></i><i></i><i></i></span>
-</div>
-<div class="cf-mock__body">
-<p class="cf-mock__kicker">Treino sem desculpa</p>
-<p class="cf-mock__headline">Energia alta. Resultado à vista.</p>
-<span class="cf-mock__cta">Começar agora</span>
-</div>
-</div>
-</div><p class="cf-small cf-preview-note">Prévia ilustrativa do conceito.</p>
-<div class="cf-work__body">
-<p class="cf-work__tag">Estúdio de treinamento</p>
-<h3 class="cf-work__title">VOLT Training Club</h3>
-<p class="cf-work__desc">Preto, vermelho e tipografia inclinada para transmitir intensidade e movimento já na primeira dobra.</p>
-<button aria-haspopup="dialog" class="cf-link-btn" data-project="volt" type="button">
-                        Ver projeto <i aria-hidden="true" class="fa-solid fa-arrow-right"></i>
-</button>
-</div>
-</article>
-</div>
-</div>
+
+<!-- ============ SERVIÇOS ============ -->
+<section aria-labelledby="servicos-title" class="sec services" id="servicos">
+  <div class="wrap">
+    <div class="sec__head sec__head--split">
+      <div>
+        <p class="label rv"><span>03</span>Serviços</p>
+        <h2 class="h2" data-split="" id="servicos-title">Do conteúdo à publicação, cada detalhe <em>a favor do foco.</em></h2>
+      </div>
+      <p class="lead rv">Da organização do conteúdo à publicação, com recursos definidos conforme a necessidade do projeto.</p>
+    </div>
+
+    <div class="bento">
+      <article class="tile tile--a rv" data-spot="">
+        <div aria-hidden="true" class="demo demo-layout">
+          <div class="dl__screen">
+            <i class="dl__b dl__b--nav"></i><i class="dl__b dl__b--title"></i><i class="dl__b dl__b--text"></i><i class="dl__b dl__b--cta"></i><i class="dl__b dl__b--img"></i>
+          </div>
+          <div class="dl__labels"><span>Estética</span><span>Barbearia</span><span>Academia</span></div>
+        </div>
+        <div class="tile__body">
+          <span class="tile__num">S/01</span>
+          <h3>Landing pages sob medida</h3>
+          <p>Adaptamos a estrutura, os textos e as seções ao objetivo e aos materiais de cada negócio.</p>
+        </div>
+      </article>
+
+      <article class="tile tile--b rv" data-spot="">
+        <div aria-hidden="true" class="demo demo-brand" data-brand-cycle="">
+          <span class="db__aa">Aa</span>
+          <div class="db__meta"><span class="db__name">Cormorant Garamond</span><span class="db__mood">Acolhedora</span></div>
+          <div class="db__sw"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="tile__body">
+          <span class="tile__num">S/02</span>
+          <h3>Direção visual</h3>
+          <p>Paleta, tipografia e detalhes que alinham a página ao posicionamento da sua marca.</p>
+        </div>
+      </article>
+
+      <article class="tile tile--c rv" data-spot="">
+        <div aria-hidden="true" class="demo demo-copy" data-copy="">
+          <p class="dc__row dc__row--before"><span>Antes</span><s data-copy-before="">Bem-vindo ao nosso site</s></p>
+          <p class="dc__row dc__row--after"><span>Depois</span><b><span data-copy-after="">Pão artesanal saindo do forno às 7h.</span><i class="dc__caret"></i></b></p>
+        </div>
+        <div class="tile__body">
+          <span class="tile__num">S/03</span>
+          <h3>Copy estratégica</h3>
+          <p>Ajudamos a organizar e revisar textos de apresentação, benefícios e chamadas para contato.</p>
+        </div>
+      </article>
+
+      <article class="tile tile--d rv" data-spot="">
+        <div aria-hidden="true" class="demo demo-device">
+          <div class="dd__frame">
+            <div class="dd__nav"><b></b><i></i></div>
+            <div class="dd__grid"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="dd__sizes"><span>Desktop</span><span>Tablet</span><span>Celular</span></div>
+        </div>
+        <div class="tile__body">
+          <span class="tile__num">S/04</span>
+          <h3>Experiência mobile</h3>
+          <p>Layout adaptável a celulares, tablets e computadores.</p>
+        </div>
+      </article>
+
+      <article class="tile tile--e rv" data-spot="">
+        <ul aria-hidden="true" class="demo demo-tree">
+          <li style="--d:0"><code>&lt;h1&gt;</code><span>Título principal</span><i class="fa-solid fa-check"></i></li>
+          <li class="in" style="--d:1"><code>&lt;h2&gt;</code><span>Serviços</span><i class="fa-solid fa-check"></i></li>
+          <li class="in" style="--d:2"><code>&lt;h2&gt;</code><span>Contato</span><i class="fa-solid fa-check"></i></li>
+          <li style="--d:3"><code>alt</code><span>Imagens descritas</span><i class="fa-solid fa-check"></i></li>
+          <li style="--d:4"><code>:focus</code><span>Foco visível</span><i class="fa-solid fa-check"></i></li>
+        </ul>
+        <div class="tile__body">
+          <span class="tile__num">S/05</span>
+          <h3>Organização e boas práticas</h3>
+          <p>Estrutura com hierarquia de conteúdo, atenção à acessibilidade e práticas de otimização.</p>
+        </div>
+      </article>
+
+      <article class="tile tile--f rv" data-spot="">
+        <div class="tile__body">
+          <span class="tile__num">S/06</span>
+          <h3>Publicação e ajustes</h3>
+          <p>A publicação, a configuração do domínio e a quantidade de ajustes são combinadas na proposta.</p>
+        </div>
+        <div aria-hidden="true" class="demo demo-ship">
+          <div class="ds__term">
+            <p style="--d:0"><span>›</span>briefing aprovado<b>ok</b></p>
+            <p style="--d:1"><span>›</span>prévia revisada<b>ok</b></p>
+            <p style="--d:2"><span>›</span>versão mobile conferida<b>ok</b></p>
+            <p style="--d:3"><span>›</span>publicação configurada<b>ok</b></p>
+          </div>
+          <div class="ds__url"><i class="fa-solid fa-lock"></i><span>seunegocio.com.br</span><em>no ar</em></div>
+        </div>
+      </article>
+    </div>
+  </div>
 </section>
-<div aria-hidden="true" aria-labelledby="project-title-serena" aria-modal="true" class="cf-modal" id="project-serena" role="dialog">
-<div class="cf-modal__dialog">
-<button aria-label="Fechar projeto" class="cf-modal__close" type="button"><i aria-hidden="true" class="fa-solid fa-xmark"></i></button>
-<div class="cf-modal__grid">
-<div class="cf-modal__preview">
-<div class="cf-work__frame">
-<div class="cf-work__bar"><span></span><span></span><span></span></div>
-<div class="cf-work__screen cf-mock cf-mock--serena">
-<div class="cf-mock__top">
-<span class="cf-mock__brand">Serena</span>
-<span class="cf-mock__nav"><i></i><i></i><i></i></span>
-</div>
-<div class="cf-mock__body">
-<p class="cf-mock__kicker">Beleza que respeita o tempo</p>
-<p class="cf-mock__headline">Cuidado que se nota no primeiro olhar.</p>
-<span class="cf-mock__cta">Agendar avaliação</span>
-</div>
-</div>
-</div><p class="cf-small">Representação ilustrativa. Acesse o site demonstrativo pelo link ao lado.</p>
-<div class="cf-swatches"><span aria-label="Marfim" class="cf-swatch" role="img" style="background: oklch(0.985 0.008 85)" title="Marfim"></span><span aria-label="Areia" class="cf-swatch" role="img" style="background: oklch(0.935 0.025 78)" title="Areia"></span><span aria-label="Verde-sálvia" class="cf-swatch" role="img" style="background: oklch(0.66 0.045 145)" title="Verde-sálvia"></span><span aria-label="Verde profundo" class="cf-swatch" role="img" style="background: oklch(0.45 0.05 148)" title="Verde profundo"></span><span aria-label="Dourado" class="cf-swatch" role="img" style="background: oklch(0.76 0.09 82)" title="Dourado"></span></div>
-<p class="cf-small">Paleta do conceito visual demonstrativo.</p>
-</div>
-<div class="cf-modal__info">
-<p class="cf-work__tag">Estética facial e corporal</p>
-<h3 class="cf-h3" id="project-title-serena">Serena Estética</h3>
-<p class="cf-text">Conceito de landing page para estética, com tipografia serifada, tons claros e verde-sálvia, pensado para transmitir acolhimento.</p>
-<h4 class="cf-modal__label">Objetivo do conceito</h4>
-<p class="cf-text">Criar uma experiência visual acolhedora para apresentar tratamentos e facilitar a navegação em uma clínica de estética fictícia.</p>
-<h4 class="cf-modal__label">Direção visual</h4>
-<p class="cf-text">Marfim, areia, verde-sálvia e detalhes dourados, com títulos em Cormorant Garamond e botões demonstrativos de contato.</p>
-<h4 class="cf-modal__label">Elementos da demonstração</h4>
-<ul class="cf-deliverables">
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Estrutura de seções e hierarquia</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Direção visual e paleta</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Textos de apresentação</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Chamada demonstrativa para avaliação</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Versão mobile completa</span></li>
-</ul>
-<a class="cf-btn cf-btn--ghost cf-modal__cta cf-project-live" href="https://serena-glow-appointments.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site publicado ↗</a><a class="cf-btn cf-btn--primary cf-modal__cta" data-close-modal="" href="#contato">Quero algo assim</a>
-</div>
-</div>
-</div>
-</div>
-<div aria-hidden="true" aria-labelledby="project-title-black-crown" aria-modal="true" class="cf-modal" id="project-black-crown" role="dialog">
-<div class="cf-modal__dialog">
-<button aria-label="Fechar projeto" class="cf-modal__close" type="button"><i aria-hidden="true" class="fa-solid fa-xmark"></i></button>
-<div class="cf-modal__grid">
-<div class="cf-modal__preview">
-<div class="cf-work__frame">
-<div class="cf-work__bar"><span></span><span></span><span></span></div>
-<div class="cf-work__screen cf-mock cf-mock--crown">
-<div class="cf-mock__top">
-<span class="cf-mock__brand">Black Crown</span>
-<span class="cf-mock__nav"><i></i><i></i><i></i></span>
-</div>
-<div class="cf-mock__body">
-<p class="cf-mock__kicker">Corte, navalha e ritual</p>
-<p class="cf-mock__headline">O padrão de excelência em cada detalhe.</p>
-<span class="cf-mock__cta">Agendar horário</span>
-</div>
-</div>
-</div><p class="cf-small">Representação ilustrativa. Acesse o site demonstrativo pelo link ao lado.</p>
-<div class="cf-swatches">
-<span aria-hidden="true" class="cf-swatch" style="background: #0C0C0C"></span>
-<span aria-hidden="true" class="cf-swatch" style="background: #D4AF37"></span>
-<span aria-hidden="true" class="cf-swatch" style="background: #F3EDE2"></span>
-</div>
-<p class="cf-small">Paleta do conceito visual demonstrativo.</p>
-</div>
-<div class="cf-modal__info">
-<p class="cf-work__tag">Barbearia premium</p>
-<h3 class="cf-h3" id="project-title-black-crown">Black Crown Barber Studio</h3>
-<p class="cf-text">Preto profundo, dourado discreto e tipografia forte para uma barbearia que vende experiência, não apenas corte.</p>
-<h4 class="cf-modal__label">Objetivo do conceito</h4>
-<p class="cf-text">Explorar uma identidade visual premium para uma barbearia conceitual, com foco na apresentação de serviços e na organização da navegação.</p>
-<h4 class="cf-modal__label">Direção visual</h4>
-<p class="cf-text">Preto e dourado, títulos de alto contraste e uma apresentação inspirada no posicionamento de uma barbearia premium.</p>
-<h4 class="cf-modal__label">Elementos da demonstração</h4>
-<ul class="cf-deliverables">
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Estrutura de posicionamento premium</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Direção visual preto e dourado</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Textos de serviços e rituais</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Chamada demonstrativa para agendamento</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Versão mobile completa</span></li>
-</ul>
-<a class="cf-btn cf-btn--ghost cf-modal__cta cf-project-live" href="https://black-crown-ten.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site publicado ↗</a><a class="cf-btn cf-btn--primary cf-modal__cta" data-close-modal="" href="#contato">Quero algo assim</a>
-</div>
-</div>
-</div>
-</div>
-<div aria-hidden="true" aria-labelledby="project-title-volt" aria-modal="true" class="cf-modal" id="project-volt" role="dialog">
-<div class="cf-modal__dialog">
-<button aria-label="Fechar projeto" class="cf-modal__close" type="button"><i aria-hidden="true" class="fa-solid fa-xmark"></i></button>
-<div class="cf-modal__grid">
-<div class="cf-modal__preview">
-<div class="cf-work__frame">
-<div class="cf-work__bar"><span></span><span></span><span></span></div>
-<div class="cf-work__screen cf-mock cf-mock--volt">
-<div class="cf-mock__top">
-<span class="cf-mock__brand">VOLT</span>
-<span class="cf-mock__nav"><i></i><i></i><i></i></span>
-</div>
-<div class="cf-mock__body">
-<p class="cf-mock__kicker">Treino sem desculpa</p>
-<p class="cf-mock__headline">Energia alta. Resultado à vista.</p>
-<span class="cf-mock__cta">Começar agora</span>
-</div>
-</div>
-</div><p class="cf-small">Representação ilustrativa. Acesse o site demonstrativo pelo link ao lado.</p>
-<div class="cf-swatches">
-<span aria-hidden="true" class="cf-swatch" style="background: #0A0A0B"></span>
-<span aria-hidden="true" class="cf-swatch" style="background: #FF2E3D"></span>
-<span aria-hidden="true" class="cf-swatch" style="background: #FAFAFA"></span>
-</div>
-<p class="cf-small">Paleta do conceito visual demonstrativo.</p>
-</div>
-<div class="cf-modal__info">
-<p class="cf-work__tag">Estúdio de treinamento</p>
-<h3 class="cf-h3" id="project-title-volt">VOLT Training Club</h3>
-<p class="cf-text">Preto, vermelho e tipografia inclinada para transmitir intensidade e movimento já na primeira dobra.</p>
-<h4 class="cf-modal__label">Objetivo do conceito</h4>
-<p class="cf-text">Representar visualmente a energia de um estúdio de treinamento fictício e destacar informações sobre modalidades e aulas experimentais.</p>
-<h4 class="cf-modal__label">Direção visual</h4>
-<p class="cf-text">Vermelho vibrante sobre preto, contraste forte e elementos visuais que reforçam a proposta esportiva do conceito.</p>
-<h4 class="cf-modal__label">Elementos da demonstração</h4>
-<ul class="cf-deliverables">
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Estrutura orientada a captação</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Direção visual preto e vermelho</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Textos de modalidades</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Chamada demonstrativa para aula experimental</span></li>
-<li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Versão mobile completa</span></li>
-</ul>
-<a class="cf-btn cf-btn--ghost cf-modal__cta cf-project-live" href="https://volt-training-club.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site publicado ↗</a><a class="cf-btn cf-btn--primary cf-modal__cta" data-close-modal="" href="#contato">Quero algo assim</a>
-</div>
-</div>
-</div>
-</div>
-<section aria-labelledby="processo-title" class="cf-section" id="processo">
-<div class="cf-container">
-<div class="cf-section__head cf-section__head--center">
-<p class="cf-eyebrow reveal">Como funciona</p>
-<h2 class="cf-h2 reveal" id="processo-title">Do primeiro contato à publicação, com etapas definidas.</h2>
-<p class="cf-lead reveal">Este é nosso fluxo de trabalho proposto. Prazos, entregas e revisões são definidos antes do início de cada projeto.</p>
-</div>
-<div class="cf-process">
-<article class="cf-process__card reveal">
-<span aria-hidden="true" class="cf-process__num">01</span>
-<h3 class="cf-h3">Briefing</h3>
-<p class="cf-text">Conversamos sobre o negócio, o público, o objetivo da página e os materiais que serão necessários.</p>
-</article>
-<article class="cf-process__card reveal">
-<span aria-hidden="true" class="cf-process__num">02</span>
-<h3 class="cf-h3">Criação</h3>
-<p class="cf-text">Organizamos a página, seus textos e a identidade visual de acordo com o briefing aprovado.</p>
-</article>
-<article class="cf-process__card reveal">
-<span aria-hidden="true" class="cf-process__num">03</span>
-<h3 class="cf-h3">Revisão</h3>
-<p class="cf-text">Apresentamos uma prévia para avaliação e realizamos os ajustes previstos na proposta.</p>
-</article>
-<article class="cf-process__card reveal">
-<span aria-hidden="true" class="cf-process__num">04</span>
-<h3 class="cf-h3">Publicação</h3>
-<p class="cf-text">Quando incluída no escopo, configuramos a publicação e verificamos a navegação e a versão mobile. Domínio e serviços pagos são tratados separadamente, quando necessários.</p>
-</article>
-</div>
-</div>
+
+<!-- ============ PORTFÓLIO (rolagem horizontal) ============ -->
+<section aria-labelledby="portfolio-title" class="works" id="portfolio">
+  <div class="works__sticky" id="works-sticky">
+    <div class="works__track" id="works-track">
+      <div class="works__intro">
+        <p class="label rv"><span>04</span>Portfólio</p>
+        <h2 class="h2" data-split="" id="portfolio-title">Três conceitos. <em>Três personalidades.</em></h2>
+        <p class="lead rv">Serena Estética, Black Crown e VOLT são projetos conceituais do portfólio ClickFocus — não são trabalhos contratados por clientes reais.</p>
+        <p aria-hidden="true" class="works__hint">Continue rolando <i class="fa-solid fa-arrow-right"></i></p>
+      </div>
+
+      <article class="proj proj--serena">
+        <div class="proj__media" data-cursor-label="Ver projeto" data-open-project="serena">
+          <div class="browser"><div class="browser__bar"><span></span><span></span><span></span><em>serena-glow-appointments.vercel.app</em></div>
+            <div class="shot shot--serena">
+              <div class="shot__nav"><b>Serena</b><span><i>Tratamentos</i><i>Sobre</i><i>Contato</i></span></div>
+              <div class="shot__hero">
+                <div class="shot__copy"><p class="shot__k">Beleza que respeita o tempo</p><p class="shot__h">Cuidado que se nota no primeiro olhar.</p><span class="shot__cta">Agendar avaliação</span></div>
+                <div class="shot__arch"></div>
+              </div>
+              <div class="shot__cards"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="proj__info">
+          <span class="proj__num">01 — 03</span>
+          <p class="proj__tag">Estética facial e corporal</p>
+          <h3 class="proj__title">Serena Estética</h3>
+          <p class="proj__desc">Conceito de landing page para estética, com tipografia serifada, tons claros e verde-sálvia, pensado para transmitir acolhimento.</p>
+          <ul class="proj__chips"><li>Cormorant Garamond</li><li>Marfim &amp; sálvia</li><li>Versão mobile</li></ul>
+          <div class="proj__actions">
+            <button aria-haspopup="dialog" class="btn btn--solid" data-project="serena" type="button">Ver detalhes</button>
+            <a class="proj__live" href="https://serena-glow-appointments.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site <i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <p class="proj__note">Prévia ilustrativa do conceito.</p>
+        </div>
+      </article>
+
+      <article class="proj proj--crown">
+        <div class="proj__media" data-cursor-label="Ver projeto" data-open-project="black-crown">
+          <div class="browser"><div class="browser__bar"><span></span><span></span><span></span><em>black-crown-ten.vercel.app</em></div>
+            <div class="shot shot--crown">
+              <div class="shot__nav"><b>Black Crown</b><span><i>Serviços</i><i>Rituais</i><i>Agenda</i></span></div>
+              <div class="shot__center">
+                <i class="fa-solid fa-crown shot__icon"></i>
+                <p class="shot__k">Corte, navalha e ritual</p>
+                <p class="shot__h">O padrão de excelência em cada detalhe.</p>
+                <span class="shot__cta">Agendar horário</span>
+              </div>
+              <div class="shot__rule"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="proj__info">
+          <span class="proj__num">02 — 03</span>
+          <p class="proj__tag">Barbearia premium</p>
+          <h3 class="proj__title">Black Crown Barber Studio</h3>
+          <p class="proj__desc">Preto profundo, dourado discreto e tipografia forte para uma barbearia que vende experiência, não apenas corte.</p>
+          <ul class="proj__chips"><li>Preto &amp; dourado</li><li>Alto contraste</li><li>Versão mobile</li></ul>
+          <div class="proj__actions">
+            <button aria-haspopup="dialog" class="btn btn--solid" data-project="black-crown" type="button">Ver detalhes</button>
+            <a class="proj__live" href="https://black-crown-ten.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site <i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <p class="proj__note">Prévia ilustrativa do conceito.</p>
+        </div>
+      </article>
+
+      <article class="proj proj--volt">
+        <div class="proj__media" data-cursor-label="Ver projeto" data-open-project="volt">
+          <div class="browser"><div class="browser__bar"><span></span><span></span><span></span><em>volt-training-club.vercel.app</em></div>
+            <div class="shot shot--volt">
+              <div class="shot__nav"><b>VOLT</b><span><i>Modalidades</i><i>Planos</i><i>Aula experimental</i></span></div>
+              <div class="shot__copy"><p class="shot__k">Treino sem desculpa</p><p class="shot__h">Energia alta. Resultado à vista.</p><span class="shot__cta">Começar agora</span></div>
+              <div class="shot__slash"></div>
+              <div class="shot__ticker"><span>Força • HIIT • Funcional • Mobilidade • Força • HIIT • Funcional •</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="proj__info">
+          <span class="proj__num">03 — 03</span>
+          <p class="proj__tag">Estúdio de treinamento</p>
+          <h3 class="proj__title">VOLT Training Club</h3>
+          <p class="proj__desc">Preto, vermelho e tipografia inclinada para transmitir intensidade e movimento já na primeira dobra.</p>
+          <ul class="proj__chips"><li>Preto &amp; vermelho</li><li>Tipografia inclinada</li><li>Versão mobile</li></ul>
+          <div class="proj__actions">
+            <button aria-haspopup="dialog" class="btn btn--solid" data-project="volt" type="button">Ver detalhes</button>
+            <a class="proj__live" href="https://volt-training-club.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site <i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <p class="proj__note">Prévia ilustrativa do conceito.</p>
+        </div>
+      </article>
+
+      <div class="works__outro">
+        <p class="works__outro-k">Próximo conceito</p>
+        <p class="works__outro-h">O seu negócio, <em>em foco.</em></p>
+        <a class="btn btn--primary btn--lg" data-magnetic="" href="#contato">Quero uma página assim <i aria-hidden="true" class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div aria-hidden="true" class="works__bar"><span id="works-bar"></span></div>
+  </div>
 </section>
-<section aria-labelledby="faq-title" class="cf-section" id="faq">
-<div class="cf-container">
-<div class="cf-section__head cf-section__head--center">
-<p class="cf-eyebrow reveal">Perguntas frequentes</p>
-<h2 class="cf-h2 reveal" id="faq-title">Antes de pedir o orçamento.</h2>
-<p class="cf-lead reveal">Confira os principais pontos sobre orçamento, publicação e os serviços que podemos incluir.</p>
+
+<!-- ============ MODAIS DOS PROJETOS ============ -->
+<div aria-hidden="true" aria-labelledby="project-title-serena" aria-modal="true" class="modal" id="project-serena" role="dialog">
+  <div class="modal__dialog">
+    <button aria-label="Fechar projeto" class="modal__close" type="button"><i aria-hidden="true" class="fa-solid fa-xmark"></i></button>
+    <div class="modal__grid">
+      <div class="modal__preview">
+        <div class="browser"><div class="browser__bar"><span></span><span></span><span></span></div>
+          <div class="shot shot--serena">
+            <div class="shot__nav"><b>Serena</b><span><i>Tratamentos</i><i>Sobre</i><i>Contato</i></span></div>
+            <div class="shot__hero">
+              <div class="shot__copy"><p class="shot__k">Beleza que respeita o tempo</p><p class="shot__h">Cuidado que se nota no primeiro olhar.</p><span class="shot__cta">Agendar avaliação</span></div>
+              <div class="shot__arch"></div>
+            </div>
+            <div class="shot__cards"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <p class="small">Representação ilustrativa. Acesse o site demonstrativo pelo link ao lado.</p>
+        <div class="swatches"><span aria-label="Marfim" class="swatch" role="img" style="background: oklch(0.985 0.008 85)" title="Marfim"></span><span aria-label="Areia" class="swatch" role="img" style="background: oklch(0.935 0.025 78)" title="Areia"></span><span aria-label="Verde-sálvia" class="swatch" role="img" style="background: oklch(0.66 0.045 145)" title="Verde-sálvia"></span><span aria-label="Verde profundo" class="swatch" role="img" style="background: oklch(0.45 0.05 148)" title="Verde profundo"></span><span aria-label="Dourado" class="swatch" role="img" style="background: oklch(0.76 0.09 82)" title="Dourado"></span></div>
+        <p class="small">Paleta do conceito visual demonstrativo.</p>
+      </div>
+      <div class="modal__info">
+        <p class="proj__tag">Estética facial e corporal</p>
+        <h3 class="modal__title" id="project-title-serena">Serena Estética</h3>
+        <p class="text">Conceito de landing page para estética, com tipografia serifada, tons claros e verde-sálvia, pensado para transmitir acolhimento.</p>
+        <h4 class="modal__label">Objetivo do conceito</h4>
+        <p class="text">Criar uma experiência visual acolhedora para apresentar tratamentos e facilitar a navegação em uma clínica de estética fictícia.</p>
+        <h4 class="modal__label">Direção visual</h4>
+        <p class="text">Marfim, areia, verde-sálvia e detalhes dourados, com títulos em Cormorant Garamond e botões demonstrativos de contato.</p>
+        <h4 class="modal__label">Elementos da demonstração</h4>
+        <ul class="deliverables">
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Estrutura de seções e hierarquia</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Direção visual e paleta</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Textos de apresentação</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Chamada demonstrativa para avaliação</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Versão mobile completa</span></li>
+        </ul>
+        <div class="modal__ctas">
+          <a class="btn btn--ghost" href="https://serena-glow-appointments.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site publicado ↗</a>
+          <a class="btn btn--primary" data-close-modal="" href="#contato">Quero algo assim</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="cf-faq"><div class="cf-faq__item reveal"><button aria-controls="faq-panel-1" aria-expanded="false" class="cf-faq__trigger" id="faq-trigger-1" type="button"><span>Quanto tempo leva para a página ficar pronta?</span><span aria-hidden="true" class="cf-faq__icon"><i class="fa-solid fa-chevron-down"></i></span></button><div aria-labelledby="faq-trigger-1" class="cf-faq__panel" hidden="" id="faq-panel-1" role="region">O prazo depende da complexidade da página, dos materiais disponíveis e do processo de aprovação. Você recebe uma previsão de entrega na proposta, antes do início do trabalho.</div></div><div class="cf-faq__item reveal"><button aria-controls="faq-panel-2" aria-expanded="false" class="cf-faq__trigger" id="faq-trigger-2" type="button"><span>Quanto custa uma landing page?</span><span aria-hidden="true" class="cf-faq__icon"><i class="fa-solid fa-chevron-down"></i></span></button><div aria-labelledby="faq-trigger-2" class="cf-faq__panel" hidden="" id="faq-panel-2" role="region">O valor é definido conforme o escopo: seções, conteúdo, identidade visual e funcionalidades. A proposta informa o serviço contratado e eventuais despesas externas, como domínio, hospedagem ou ferramentas pagas.</div></div><div class="cf-faq__item reveal"><button aria-controls="faq-panel-3" aria-expanded="false" class="cf-faq__trigger" id="faq-trigger-3" type="button"><span>Preciso ter textos e fotos prontos?</span><span aria-hidden="true" class="cf-faq__icon"><i class="fa-solid fa-chevron-down"></i></span></button><div aria-labelledby="faq-trigger-3" class="cf-faq__panel" hidden="" id="faq-panel-3" role="region">Não necessariamente. Podemos ajudar a organizar os textos e orientar a seleção de imagens. Produção de fotos, compra de imagens e criação de logotipo não estão incluídas automaticamente; esses itens precisam constar na proposta.</div></div><div class="cf-faq__item reveal"><button aria-controls="faq-panel-4" aria-expanded="false" class="cf-faq__trigger" id="faq-trigger-4" type="button"><span>A página funciona em celulares e computadores?</span><span aria-hidden="true" class="cf-faq__icon"><i class="fa-solid fa-chevron-down"></i></span></button><div aria-labelledby="faq-trigger-4" class="cf-faq__panel" hidden="" id="faq-panel-4" role="region">Sim, o desenvolvimento contempla layout responsivo, adaptado a diferentes tamanhos de tela. Antes da entrega, conferimos a navegação nos dispositivos e navegadores previstos no escopo.</div></div><div class="cf-faq__item reveal"><button aria-controls="faq-panel-5" aria-expanded="false" class="cf-faq__trigger" id="faq-trigger-5" type="button"><span>A ClickFocus publica a página no meu domínio?</span><span aria-hidden="true" class="cf-faq__icon"><i class="fa-solid fa-chevron-down"></i></span></button><div aria-labelledby="faq-trigger-5" class="cf-faq__panel" hidden="" id="faq-panel-5" role="region">Podemos cuidar da publicação e da configuração do domínio quando esses serviços estiverem previstos no orçamento. Registro e renovação de domínio, hospedagem e outras assinaturas não estão automaticamente incluídos.</div></div><div class="cf-faq__item reveal"><button aria-controls="faq-panel-6" aria-expanded="false" class="cf-faq__trigger" id="faq-trigger-6" type="button"><span>É possível incluir um botão de WhatsApp?</span><span aria-hidden="true" class="cf-faq__icon"><i class="fa-solid fa-chevron-down"></i></span></button><div aria-labelledby="faq-trigger-6" class="cf-faq__panel" hidden="" id="faq-panel-6" role="region">Sim. Podemos adicionar um botão que abre uma conversa no número informado por você. Envio automático de mensagens, agendamento, CRM ou outras automações precisam ser avaliados e contratados à parte.</div></div><div class="cf-faq__item reveal"><button aria-controls="faq-panel-7" aria-expanded="false" class="cf-faq__trigger" id="faq-trigger-7" type="button"><span>Uma landing page garante mais vendas ou clientes?</span><span aria-hidden="true" class="cf-faq__icon"><i class="fa-solid fa-chevron-down"></i></span></button><div aria-labelledby="faq-trigger-7" class="cf-faq__panel" hidden="" id="faq-panel-7" role="region">Não. Uma landing page pode facilitar a apresentação de um negócio e o contato de interessados, mas os resultados dependem também da oferta, do público, da divulgação e de outros fatores. Não garantimos quantidade de visitas, leads ou vendas.</div></div><div class="cf-faq__item reveal"><button aria-controls="faq-panel-8" aria-expanded="false" class="cf-faq__trigger" id="faq-trigger-8" type="button"><span>Os projetos do portfólio são de clientes reais?</span><span aria-hidden="true" class="cf-faq__icon"><i class="fa-solid fa-chevron-down"></i></span></button><div aria-labelledby="faq-trigger-8" class="cf-faq__panel" hidden="" id="faq-panel-8" role="region">Não. Serena Estética, Black Crown Barber Studio e VOLT Training Club são projetos demonstrativos, criados para apresentar diferentes estilos de landing page. Não representam clientes atendidos, resultados comerciais ou depoimentos reais.</div></div></div>
+
+<div aria-hidden="true" aria-labelledby="project-title-black-crown" aria-modal="true" class="modal" id="project-black-crown" role="dialog">
+  <div class="modal__dialog">
+    <button aria-label="Fechar projeto" class="modal__close" type="button"><i aria-hidden="true" class="fa-solid fa-xmark"></i></button>
+    <div class="modal__grid">
+      <div class="modal__preview">
+        <div class="browser"><div class="browser__bar"><span></span><span></span><span></span></div>
+          <div class="shot shot--crown">
+            <div class="shot__nav"><b>Black Crown</b><span><i>Serviços</i><i>Rituais</i><i>Agenda</i></span></div>
+            <div class="shot__center">
+              <i class="fa-solid fa-crown shot__icon"></i>
+              <p class="shot__k">Corte, navalha e ritual</p>
+              <p class="shot__h">O padrão de excelência em cada detalhe.</p>
+              <span class="shot__cta">Agendar horário</span>
+            </div>
+            <div class="shot__rule"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <p class="small">Representação ilustrativa. Acesse o site demonstrativo pelo link ao lado.</p>
+        <div class="swatches">
+          <span aria-hidden="true" class="swatch" style="background: #0C0C0C"></span>
+          <span aria-hidden="true" class="swatch" style="background: #D4AF37"></span>
+          <span aria-hidden="true" class="swatch" style="background: #F3EDE2"></span>
+        </div>
+        <p class="small">Paleta do conceito visual demonstrativo.</p>
+      </div>
+      <div class="modal__info">
+        <p class="proj__tag">Barbearia premium</p>
+        <h3 class="modal__title" id="project-title-black-crown">Black Crown Barber Studio</h3>
+        <p class="text">Preto profundo, dourado discreto e tipografia forte para uma barbearia que vende experiência, não apenas corte.</p>
+        <h4 class="modal__label">Objetivo do conceito</h4>
+        <p class="text">Explorar uma identidade visual premium para uma barbearia conceitual, com foco na apresentação de serviços e na organização da navegação.</p>
+        <h4 class="modal__label">Direção visual</h4>
+        <p class="text">Preto e dourado, títulos de alto contraste e uma apresentação inspirada no posicionamento de uma barbearia premium.</p>
+        <h4 class="modal__label">Elementos da demonstração</h4>
+        <ul class="deliverables">
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Estrutura de posicionamento premium</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Direção visual preto e dourado</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Textos de serviços e rituais</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Chamada demonstrativa para agendamento</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Versão mobile completa</span></li>
+        </ul>
+        <div class="modal__ctas">
+          <a class="btn btn--ghost" href="https://black-crown-ten.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site publicado ↗</a>
+          <a class="btn btn--primary" data-close-modal="" href="#contato">Quero algo assim</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div aria-hidden="true" aria-labelledby="project-title-volt" aria-modal="true" class="modal" id="project-volt" role="dialog">
+  <div class="modal__dialog">
+    <button aria-label="Fechar projeto" class="modal__close" type="button"><i aria-hidden="true" class="fa-solid fa-xmark"></i></button>
+    <div class="modal__grid">
+      <div class="modal__preview">
+        <div class="browser"><div class="browser__bar"><span></span><span></span><span></span></div>
+          <div class="shot shot--volt">
+            <div class="shot__nav"><b>VOLT</b><span><i>Modalidades</i><i>Planos</i><i>Aula experimental</i></span></div>
+            <div class="shot__copy"><p class="shot__k">Treino sem desculpa</p><p class="shot__h">Energia alta. Resultado à vista.</p><span class="shot__cta">Começar agora</span></div>
+            <div class="shot__slash"></div>
+            <div class="shot__ticker"><span>Força • HIIT • Funcional • Mobilidade • Força • HIIT • Funcional •</span></div>
+          </div>
+        </div>
+        <p class="small">Representação ilustrativa. Acesse o site demonstrativo pelo link ao lado.</p>
+        <div class="swatches">
+          <span aria-hidden="true" class="swatch" style="background: #0A0A0B"></span>
+          <span aria-hidden="true" class="swatch" style="background: #FF2E3D"></span>
+          <span aria-hidden="true" class="swatch" style="background: #FAFAFA"></span>
+        </div>
+        <p class="small">Paleta do conceito visual demonstrativo.</p>
+      </div>
+      <div class="modal__info">
+        <p class="proj__tag">Estúdio de treinamento</p>
+        <h3 class="modal__title" id="project-title-volt">VOLT Training Club</h3>
+        <p class="text">Preto, vermelho e tipografia inclinada para transmitir intensidade e movimento já na primeira dobra.</p>
+        <h4 class="modal__label">Objetivo do conceito</h4>
+        <p class="text">Representar visualmente a energia de um estúdio de treinamento fictício e destacar informações sobre modalidades e aulas experimentais.</p>
+        <h4 class="modal__label">Direção visual</h4>
+        <p class="text">Vermelho vibrante sobre preto, contraste forte e elementos visuais que reforçam a proposta esportiva do conceito.</p>
+        <h4 class="modal__label">Elementos da demonstração</h4>
+        <ul class="deliverables">
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Estrutura orientada a captação</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Direção visual preto e vermelho</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Textos de modalidades</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Chamada demonstrativa para aula experimental</span></li>
+          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Versão mobile completa</span></li>
+        </ul>
+        <div class="modal__ctas">
+          <a class="btn btn--ghost" href="https://volt-training-club.vercel.app/" rel="noopener noreferrer" target="_blank">Visitar site publicado ↗</a>
+          <a class="btn btn--primary" data-close-modal="" href="#contato">Quero algo assim</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROCESSO ============ -->
+<section aria-labelledby="processo-title" class="sec process" id="processo">
+  <div class="wrap process__grid">
+    <div class="process__aside">
+      <p class="label rv"><span>05</span>Como funciona</p>
+      <h2 class="h2" data-split="" id="processo-title">Do primeiro contato à publicação, <em>passo a passo.</em></h2>
+      <p class="lead rv">Este é nosso fluxo de trabalho proposto. Prazos, entregas e revisões são definidos antes do início de cada projeto.</p>
+      <p aria-hidden="true" class="process__counter"><span id="step-num">01</span><small>/ 04</small></p>
+    </div>
+    <ol class="steps" id="steps">
+      <li aria-hidden="true" class="steps__line"><span id="steps-fill"></span></li>
+      <li class="step">
+        <span aria-hidden="true" class="step__num">01</span>
+        <div class="step__body"><h3>Briefing</h3><p>Conversamos sobre o negócio, o público, o objetivo da página e os materiais que serão necessários.</p></div>
+      </li>
+      <li class="step">
+        <span aria-hidden="true" class="step__num">02</span>
+        <div class="step__body"><h3>Criação</h3><p>Organizamos a página, seus textos e a identidade visual de acordo com o briefing aprovado.</p></div>
+      </li>
+      <li class="step">
+        <span aria-hidden="true" class="step__num">03</span>
+        <div class="step__body"><h3>Revisão</h3><p>Apresentamos uma prévia para avaliação e realizamos os ajustes previstos na proposta.</p></div>
+      </li>
+      <li class="step">
+        <span aria-hidden="true" class="step__num">04</span>
+        <div class="step__body"><h3>Publicação</h3><p>Quando incluída no escopo, configuramos a publicação e verificamos a navegação e a versão mobile. Domínio e serviços pagos são tratados separadamente, quando necessários.</p></div>
+      </li>
+    </ol>
+  </div>
 </section>
-<section aria-labelledby="contato-title" class="cf-section" id="contato">
-<div class="cf-container cf-contact">
-<div>
-<p class="cf-eyebrow reveal">Contato</p>
-<h2 class="cf-h2 reveal" id="contato-title">Solicitar orçamento</h2>
-<p class="cf-lead reveal">Conte sobre seu negócio e o que deseja criar. Depois do contato inicial, conversamos sobre as necessidades e preparamos uma proposta personalizada.</p>
-<form class="cf-form reveal" id="contact-form" novalidate="">
-<div class="cf-form__row">
-<div class="cf-field">
-<label class="cf-field__label" for="cf-name">Nome</label>
-<input autocomplete="name" class="cf-input" id="cf-name" name="name" placeholder="Como podemos te chamar?" required="" type="text"/>
-</div>
-<div class="cf-field">
-<label class="cf-field__label" for="cf-email">E-mail</label>
-<input autocomplete="email" class="cf-input" id="cf-email" name="email" placeholder="voce@empresa.com" required="" type="email"/>
-</div>
-</div>
-<div class="cf-form__row">
-<div class="cf-field">
-<label class="cf-field__label" for="cf-phone">WhatsApp</label>
-<input autocomplete="tel" class="cf-input" id="cf-phone" name="phone" placeholder="(00) 00000-0000" type="tel"/>
-</div>
-<div class="cf-field">
-<label class="cf-field__label" for="cf-type">Tipo de projeto</label>
-<select class="cf-select" id="cf-type" name="projectType">
-<option value="Landing page única">Landing page única</option>
-<option value="Landing page + direção visual">Landing page + direção visual</option>
-<option value="Página de vendas">Página de vendas</option>
-<option value="Redesign de página existente">Redesign de página existente</option>
-<option value="Outro">Outro</option>
-</select>
-</div>
-</div>
-<div class="cf-field">
-<label class="cf-field__label" for="cf-message">Sobre o projeto</label>
-<textarea class="cf-textarea" id="cf-message" name="message" placeholder="Qual é o seu negócio, o que você vende e o que a página precisa alcançar?" required=""></textarea>
-</div>
-<div aria-live="polite" class="cf-form__feedback" id="contact-feedback" role="status"></div>
-<button class="cf-btn cf-btn--primary cf-btn--lg" id="contact-submit" type="submit">Copiar meu briefing</button>
-<p class="cf-small">O canal de atendimento está sendo preparado. Por enquanto, o formulário apenas copia o briefing: nenhuma solicitação é enviada à ClickFocus.</p>
-</form>
-</div>
-<aside aria-labelledby="contato-panel-title" class="cf-panel reveal">
-<h3 class="cf-h3" id="contato-panel-title">Como funciona após o primeiro contato</h3>
-<p class="cf-text">Quando você enviar sua mensagem pelo canal de atendimento, seguiremos estes passos:</p>
-<div class="cf-steps">
-<div class="cf-step">
-<span class="cf-step__num">1</span>
-<div>
-<h3>Leitura do briefing</h3>
-<p>Lemos sua mensagem para entender o que você precisa e quais informações ainda faltam.</p>
-</div>
-</div>
-<div class="cf-step">
-<span class="cf-step__num">2</span>
-<div>
-<h3>Conversa de alinhamento</h3>
-<p>Alinhamos por mensagem os objetivos, as referências e as funcionalidades desejadas.</p>
-</div>
-</div>
-<div class="cf-step">
-<span class="cf-step__num">3</span>
-<div>
-<h3>Proposta com escopo e prazo</h3>
-<p>Enviamos uma proposta com serviços, valores, prazos e condições a serem combinados.</p>
-</div>
-</div>
-</div>
-<div class="cf-panel__foot" aria-label="Canais de atendimento">
-<h4 class="cf-contact__heading">Canais de contato</h4>
-<div class="cf-contact__channel"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><div><strong>WhatsApp Business</strong><p class="cf-small" id="whatsapp-note">Em configuração. O contato será disponibilizado aqui em breve.</p></div></div>
-<a class="cf-btn cf-btn--ghost cf-btn--sm" hidden="" id="whatsapp-link" rel="noopener" target="_blank">Falar no WhatsApp <i aria-hidden="true" class="fa-brands fa-whatsapp"></i></a>
-<div class="cf-contact__channel"><i class="fa-regular fa-envelope" aria-hidden="true"></i><div><strong>E-mail comercial</strong><p class="cf-small" id="contact-email-note">Em preparação.</p><a class="cf-contact__email" id="contact-email-link" hidden=""></a></div></div>
-<div class="cf-contact__channel"><i class="fa-regular fa-clock" aria-hidden="true"></i><div><strong>Horários de atendimento</strong><p class="cf-small" id="contact-hours">Segunda a sexta, das 12h às 19h; sábado, das 11h às 14h (horário de Brasília). Domingos e feriados: sem horário fixo.</p></div></div>
-</div>
-</aside>
-</div>
+
+<!-- ============ FAQ ============ -->
+<section aria-labelledby="faq-title" class="sec faq" id="faq">
+  <div class="wrap faq__grid">
+    <div class="faq__aside">
+      <p class="label rv"><span>06</span>Perguntas frequentes</p>
+      <h2 class="h2" data-split="" id="faq-title">Antes de pedir o <em>orçamento.</em></h2>
+      <p class="lead rv">Confira os principais pontos sobre orçamento, publicação e os serviços que podemos incluir.</p>
+      <div class="faq__card rv">
+        <i aria-hidden="true" class="fa-brands fa-whatsapp"></i>
+        <div><strong>Ficou alguma dúvida?</strong><p>Pergunte direto pelo WhatsApp Business.</p></div>
+        <a class="btn btn--ghost btn--sm" href="https://wa.me/5527992249680?text=Ol%C3%A1%21%20Tenho%20uma%20d%C3%BAvida%20sobre%20as%20landing%20pages%20da%20ClickFocus." rel="noopener noreferrer" target="_blank">Perguntar</a>
+      </div>
+    </div>
+    <div class="faq__list">
+      <div class="faq__item rv"><button aria-controls="faq-panel-1" aria-expanded="false" class="faq__trigger" id="faq-trigger-1" type="button"><small>01</small><span>Quanto tempo leva para a página ficar pronta?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-1" class="faq__panel" id="faq-panel-1" role="region"><div><p>O prazo depende da complexidade da página, dos materiais disponíveis e do processo de aprovação. Você recebe uma previsão de entrega na proposta, antes do início do trabalho.</p></div></div></div>
+      <div class="faq__item rv"><button aria-controls="faq-panel-2" aria-expanded="false" class="faq__trigger" id="faq-trigger-2" type="button"><small>02</small><span>Quanto custa uma landing page?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-2" class="faq__panel" id="faq-panel-2" role="region"><div><p>O valor é definido conforme o escopo: seções, conteúdo, identidade visual e funcionalidades. A proposta informa o serviço contratado e eventuais despesas externas, como domínio, hospedagem ou ferramentas pagas.</p></div></div></div>
+      <div class="faq__item rv"><button aria-controls="faq-panel-3" aria-expanded="false" class="faq__trigger" id="faq-trigger-3" type="button"><small>03</small><span>Preciso ter textos e fotos prontos?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-3" class="faq__panel" id="faq-panel-3" role="region"><div><p>Não necessariamente. Podemos ajudar a organizar os textos e orientar a seleção de imagens. Produção de fotos, compra de imagens e criação de logotipo não estão incluídas automaticamente; esses itens precisam constar na proposta.</p></div></div></div>
+      <div class="faq__item rv"><button aria-controls="faq-panel-4" aria-expanded="false" class="faq__trigger" id="faq-trigger-4" type="button"><small>04</small><span>A página funciona em celulares e computadores?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-4" class="faq__panel" id="faq-panel-4" role="region"><div><p>Sim, o desenvolvimento contempla layout responsivo, adaptado a diferentes tamanhos de tela. Antes da entrega, conferimos a navegação nos dispositivos e navegadores previstos no escopo.</p></div></div></div>
+      <div class="faq__item rv"><button aria-controls="faq-panel-5" aria-expanded="false" class="faq__trigger" id="faq-trigger-5" type="button"><small>05</small><span>A ClickFocus publica a página no meu domínio?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-5" class="faq__panel" id="faq-panel-5" role="region"><div><p>Podemos cuidar da publicação e da configuração do domínio quando esses serviços estiverem previstos no orçamento. Registro e renovação de domínio, hospedagem e outras assinaturas não estão automaticamente incluídos.</p></div></div></div>
+      <div class="faq__item rv"><button aria-controls="faq-panel-6" aria-expanded="false" class="faq__trigger" id="faq-trigger-6" type="button"><small>06</small><span>É possível incluir um botão de WhatsApp?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-6" class="faq__panel" id="faq-panel-6" role="region"><div><p>Sim. Podemos adicionar um botão que abre uma conversa no número informado por você. Envio automático de mensagens, agendamento, CRM ou outras automações precisam ser avaliados e contratados à parte.</p></div></div></div>
+      <div class="faq__item rv"><button aria-controls="faq-panel-7" aria-expanded="false" class="faq__trigger" id="faq-trigger-7" type="button"><small>07</small><span>Uma landing page garante mais vendas ou clientes?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-7" class="faq__panel" id="faq-panel-7" role="region"><div><p>Não. Uma landing page pode facilitar a apresentação de um negócio e o contato de interessados, mas os resultados dependem também da oferta, do público, da divulgação e de outros fatores. Não garantimos quantidade de visitas, leads ou vendas.</p></div></div></div>
+      <div class="faq__item rv"><button aria-controls="faq-panel-8" aria-expanded="false" class="faq__trigger" id="faq-trigger-8" type="button"><small>08</small><span>Os projetos do portfólio são de clientes reais?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-8" class="faq__panel" id="faq-panel-8" role="region"><div><p>Não. Serena Estética, Black Crown Barber Studio e VOLT Training Club são projetos demonstrativos, criados para apresentar diferentes estilos de landing page. Não representam clientes atendidos, resultados comerciais ou depoimentos reais.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTATO ============ -->
+<section aria-labelledby="contato-title" class="sec contact" id="contato">
+  <div aria-hidden="true" class="contact__glow"></div>
+  <div class="wrap">
+    <div class="contact__head">
+      <p class="label rv"><span>07</span>Solicitar orçamento</p>
+      <h2 class="contact__title" data-split="" id="contato-title">Vamos colocar seu negócio <em>em foco?</em></h2>
+      <p class="lead rv">Conte sobre seu negócio e o que deseja criar. Depois do contato inicial, conversamos sobre as necessidades e preparamos uma proposta personalizada.</p>
+    </div>
+
+    <div class="contact__grid">
+      <form class="form rv" id="contact-form" novalidate="">
+        <div class="form__row">
+          <div class="field">
+            <label class="field__label" for="cf-name">Nome</label>
+            <input autocomplete="name" class="field__input" id="cf-name" name="name" placeholder="Como podemos te chamar?" required="" type="text"/>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cf-email">E-mail</label>
+            <input autocomplete="email" class="field__input" id="cf-email" name="email" placeholder="voce@empresa.com" required="" type="email"/>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cf-phone">WhatsApp <small>(opcional)</small></label>
+          <input autocomplete="tel" class="field__input" id="cf-phone" name="phone" placeholder="(00) 00000-0000" type="tel"/>
+        </div>
+        <fieldset class="field chips">
+          <legend class="field__label">Tipo de projeto</legend>
+          <label class="chip"><input checked="" name="projectType" type="radio" value="Landing page única"/><span>Landing page única</span></label>
+          <label class="chip"><input name="projectType" type="radio" value="Landing page + direção visual"/><span>Landing page + direção visual</span></label>
+          <label class="chip"><input name="projectType" type="radio" value="Página de vendas"/><span>Página de vendas</span></label>
+          <label class="chip"><input name="projectType" type="radio" value="Redesign de página existente"/><span>Redesign de página existente</span></label>
+          <label class="chip"><input name="projectType" type="radio" value="Outro"/><span>Outro</span></label>
+        </fieldset>
+        <div class="field">
+          <label class="field__label" for="cf-message">Sobre o projeto</label>
+          <textarea class="field__input field__input--area" id="cf-message" name="message" placeholder="Qual é o seu negócio, o que você vende e o que a página precisa alcançar?" required=""></textarea>
+        </div>
+        <div aria-live="polite" class="form__feedback" id="contact-feedback" role="status"></div>
+        <div class="form__submit">
+          <button class="btn btn--primary btn--lg" data-magnetic="" id="contact-submit" type="submit"><i aria-hidden="true" class="fa-brands fa-whatsapp"></i><span id="contact-submit-label">Continuar no WhatsApp</span></button>
+          <p class="small" id="form-disclosure">Abriremos o WhatsApp com sua mensagem preenchida. Confira os dados e toque em enviar: nenhum briefing é enviado automaticamente.</p>
+        </div>
+      </form>
+
+      <aside aria-labelledby="contato-panel-title" class="contact__side">
+        <div aria-hidden="true" class="chat rv">
+          <div class="chat__head">
+            <span class="chat__avatar"><img alt="" src="assets/favicon.svg?v=2"/></span>
+            <div><strong>ClickFocus</strong><small>WhatsApp Business · prévia da sua mensagem</small></div>
+          </div>
+          <div class="chat__body">
+            <div class="chat__bubble"><p id="brief-preview">Olá, ClickFocus! Gostaria de solicitar um orçamento de landing page.</p><time id="brief-time">--:--</time></div>
+          </div>
+          <p class="chat__foot"><i class="fa-solid fa-hand-pointer"></i>Você revisa e confirma o envio no WhatsApp.</p>
+        </div>
+
+        <div class="side-card rv">
+          <h3 class="side-card__title" id="contato-panel-title">Como funciona após o primeiro contato</h3>
+          <ol class="mini-steps">
+            <li><span>1</span><div><strong>Leitura do briefing</strong><p>Lemos sua mensagem para entender o que você precisa e quais informações ainda faltam.</p></div></li>
+            <li><span>2</span><div><strong>Conversa de alinhamento</strong><p>Alinhamos por mensagem os objetivos, as referências e as funcionalidades desejadas.</p></div></li>
+            <li><span>3</span><div><strong>Proposta com escopo e prazo</strong><p>Enviamos uma proposta com serviços, valores, prazos e condições a serem combinados.</p></div></li>
+          </ol>
+        </div>
+
+        <div aria-label="Canais de atendimento" class="channels rv" role="group">
+          <a class="channel" href="https://wa.me/5527992249680?text=Ol%C3%A1%21%20Encontrei%20a%20ClickFocus%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." id="whatsapp-link" rel="noopener noreferrer" target="_blank">
+            <i aria-hidden="true" class="fa-brands fa-whatsapp"></i><div><strong>WhatsApp Business</strong><span>(27) 99224-9680</span></div><b aria-hidden="true" class="fa-solid fa-arrow-up-right"></b>
+          </a>
+          <a class="channel" href="mailto:igorestevam1900@gmail.com" id="contact-email-link">
+            <i aria-hidden="true" class="fa-regular fa-envelope"></i><div><strong>E-mail</strong><span>igorestevam1900@gmail.com</span></div><b aria-hidden="true" class="fa-solid fa-arrow-up-right"></b>
+          </a>
+          <div class="channel channel--static">
+            <i aria-hidden="true" class="fa-regular fa-clock"></i><div><strong>Horários de atendimento</strong><span id="contact-hours">Segunda a sexta, das 12h às 19h; sábado, das 11h às 14h (horário de Brasília). Domingos e feriados: sem horário fixo.</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
 </section>
 </main>
-<footer class="cf-footer">
-<div class="cf-container">
-<div class="cf-footer__inner">
-<div class="cf-footer__brand">
-<a aria-label="ClickFocus — voltar ao topo" class="cf-logo" href="#top">
-<img class="cf-logo__image" src="assets/clickfocus-logo-dark.svg" alt="ClickFocus" width="206" height="40" decoding="async"/>
-</a>
-<p class="cf-text cf-footer__slogan">A atenção do seu cliente onde realmente importa.</p>
-<p class="cf-small">Landing pages estratégicas para pequenos negócios.</p>
-</div>
-<nav aria-label="Navegação do rodapé" class="cf-footer__col">
-<h2 class="cf-footer__title">Navegar</h2>
-<div class="cf-footer__links">
-<a href="#sobre">Sobre</a>
-<a href="#servicos">Serviços</a>
-<a href="#portfolio">Portfólio</a>
-</div>
-</nav>
-<nav aria-label="Navegação do rodapé — projeto" class="cf-footer__col">
-<h2 class="cf-footer__title">Projeto</h2>
-<div class="cf-footer__links">
-<a href="#processo">Como funciona</a>
-<a href="#faq">Perguntas frequentes</a>
-<a href="#contato">Solicitar orçamento</a>
-</div>
-</nav>
-<div class="cf-footer__col cf-footer__contact" aria-labelledby="footer-contact-title">
-<h2 class="cf-footer__title" id="footer-contact-title">Contato</h2>
-<div class="cf-footer__links">
-<a href="https://wa.me/5527992249680?text=Ol%C3%A1%21%20Encontrei%20a%20ClickFocus%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>(27) 99224-9680</span></a>
-<a href="mailto:igorestevam1900@gmail.com"><i class="fa-regular fa-envelope" aria-hidden="true"></i><span>igorestevam1900@gmail.com</span></a>
-<div class="cf-footer__hours"><i class="fa-regular fa-clock" aria-hidden="true"></i><span>Seg. a sex.: 12h às 19h<br/>Sábado: 11h às 14h<br/>Domingos e feriados: sem horário fixo</span></div>
-</div>
-</div>
-</div>
-<div class="cf-footer__bottom">
-<p>© 2026 ClickFocus. Todos os direitos reservados.</p>
-<p>Projetos do portfólio são demonstrativos.</p>
-<a class="cf-footer__top" href="#top">Voltar ao topo <i aria-hidden="true" class="fa-solid fa-arrow-up"></i></a>
-</div>
-</div>
+
+<!-- ============ RODAPÉ ============ -->
+<footer class="ftr" id="footer">
+  <div class="wrap">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <a aria-label="ClickFocus — voltar ao topo" class="ftr__logo" href="#top"><img alt="ClickFocus" decoding="async" height="40" src="assets/clickfocus-logo-dark.svg" width="206"/></a>
+        <p class="ftr__slogan">A atenção do seu cliente onde realmente importa.</p>
+        <p class="small">Landing pages estratégicas para pequenos negócios.</p>
+      </div>
+      <nav aria-label="Navegação do rodapé" class="ftr__col">
+        <h2 class="ftr__title">Navegar</h2>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+      </nav>
+      <nav aria-label="Navegação do rodapé — projeto" class="ftr__col">
+        <h2 class="ftr__title">Projeto</h2>
+        <a href="#processo">Como funciona</a>
+        <a href="#faq">Perguntas frequentes</a>
+        <a href="#contato">Solicitar orçamento</a>
+      </nav>
+      <div aria-labelledby="footer-contact-title" class="ftr__col ftr__contact">
+        <h2 class="ftr__title" id="footer-contact-title">Contato</h2>
+        <a href="https://wa.me/5527992249680?text=Ol%C3%A1%21%20Encontrei%20a%20ClickFocus%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." rel="noopener noreferrer" target="_blank"><i aria-hidden="true" class="fa-brands fa-whatsapp"></i><span>(27) 99224-9680</span></a>
+        <a href="mailto:igorestevam1900@gmail.com"><i aria-hidden="true" class="fa-regular fa-envelope"></i><span>igorestevam1900@gmail.com</span></a>
+        <div class="ftr__hours"><i aria-hidden="true" class="fa-regular fa-clock"></i><span>Seg. a sex.: 12h às 19h<br/>Sábado: 11h às 14h<br/>Domingos e feriados: sem horário fixo</span></div>
+      </div>
+    </div>
+  </div>
+  <div aria-hidden="true" class="ftr__mark" id="footer-mark"><span class="ftr__mark-base">ClickFocus</span><span class="ftr__mark-lit">ClickFocus</span></div>
+  <div class="wrap">
+    <div class="ftr__bottom">
+      <p>© 2026 ClickFocus. Todos os direitos reservados.</p>
+      <p>Projetos do portfólio são demonstrativos.</p>
+      <a class="ftr__totop" href="#top">Voltar ao topo <i aria-hidden="true" class="fa-solid fa-arrow-up"></i></a>
+    </div>
+  </div>
 </footer>
-<script defer="True" src="assets/app.js"></script></body>
+
+<!-- Barra de ação no celular -->
+<div class="dock" id="dock">
+  <a class="btn btn--primary dock__cta" href="#contato">Solicitar orçamento</a>
+  <a aria-label="Falar no WhatsApp" class="dock__wa" href="https://wa.me/5527992249680?text=Ol%C3%A1%21%20Encontrei%20a%20ClickFocus%20pelo%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." rel="noopener noreferrer" target="_blank"><i aria-hidden="true" class="fa-brands fa-whatsapp"></i></a>
+</div>
+
+<script defer="" src="assets/app.js?v=3"></script>
+</body>
 </html>

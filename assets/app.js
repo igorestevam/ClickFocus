@@ -1,72 +1,509 @@
 (() => {
   'use strict';
+  window.__cf = true;
+
   // Contatos oficiais da ClickFocus (DDI + DDD + número para o WhatsApp).
   const WHATSAPP_BUSINESS = '5527992249680';
   const CONTACT_EMAIL = 'igorestevam1900@gmail.com';
 
-  const header = document.getElementById('site-header');
-  const toggle = document.getElementById('menu-toggle');
-  const mobile = document.getElementById('mobile-menu');
-  const setScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 12);
-  window.addEventListener('scroll', setScroll, { passive: true });
-  setScroll();
+  const root = document.documentElement;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  let vw = window.innerWidth;
+  let vh = window.innerHeight;
 
-  const closeMenu = () => {
-    mobile?.classList.remove('is-open');
-    toggle?.setAttribute('aria-expanded', 'false');
-    toggle?.setAttribute('aria-label', 'Abrir menu');
-  };
-  toggle?.addEventListener('click', () => {
-    const open = mobile.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-  });
-  mobile?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeMenu(); });
+  /* ---------- Intro do hero (após as fontes) ---------- */
+  const startIntro = () => root.classList.add('is-loaded');
+  if (document.fonts && document.fonts.ready) {
+    Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 900))]).then(startIntro);
+  } else startIntro();
 
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.classList.add('js-reveal');
-    const revealObserver = new IntersectionObserver(entries => {
-      for (const entry of entries) if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      }
-    }, { threshold: 0.08, rootMargin: '0px 0px 24px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  /* ---------- Divide textos em palavras ---------- */
+  function splitWords(el, cls) {
+    let i = 0;
+    const walk = node => {
+      Array.from(node.childNodes).forEach(child => {
+        if (child.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(document.createTextNode(part)); return; }
+            const s = document.createElement('span');
+            s.className = cls;
+            s.style.setProperty('--i', i++);
+            s.textContent = part;
+            frag.append(s);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === 1 && child.getAttribute('aria-hidden') !== 'true') walk(child);
+      });
+    };
+    walk(el);
+    el.classList.add('is-split');
+  }
+  $$('[data-split]').forEach(el => splitWords(el, 'sw'));
+  const manifesto = $('[data-manifesto]');
+  let manWords = [];
+  if (manifesto) { splitWords(manifesto, 'w'); manWords = $$('.w', manifesto); }
+
+  /* ---------- Reveal ---------- */
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    $$('.rv, [data-split], .tile').forEach(el => io.observe(el));
+  } else {
+    $$('.rv, [data-split], .tile').forEach(el => el.classList.add('is-in'));
   }
 
-  // Projeto demonstrativo: botões de portfólio abrem estudos de caso.
+  /* ---------- Cabeçalho e menu ---------- */
+  const header = $('#site-header');
+  const toggle = $('#menu-toggle');
+  const menu = $('#mobile-menu');
+  let menuOpen = false;
+  if (menu) menu.inert = true;
+  function setMenu(open) {
+    menuOpen = open;
+    menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    menu.inert = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    root.classList.toggle('menu-open', open);
+    document.body.classList.toggle('no-scroll', open);
+    if (open) header.classList.remove('is-hidden');
+  }
+  toggle?.addEventListener('click', () => setMenu(!menuOpen));
+  $$('a', menu).forEach(a => a.addEventListener('click', () => setMenu(false)));
+  header?.addEventListener('focusin', () => header.classList.remove('is-hidden'));
+
+  const navLinks = $$('.hdr__nav a');
+  const navTargets = navLinks.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+
+  /* ---------- Cursor-visor ---------- */
+  const cursor = $('#cursor');
+  const dot = $('#cursor-dot');
+  const cursorLabel = $('#cursor-label');
+  const mouse = { x: vw / 2, y: vh / 2, seen: false };
+  if (finePointer && !reduced && cursor) {
+    root.classList.add('has-cursor');
+    const box = { x: mouse.x - 14, y: mouse.y - 14, w: 28, h: 28 };
+    let lockEl = null;
+    let labelEl = null;
+    const LOCKABLE = 'a, button, .chip, [data-lock]';
+    window.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      mouse.x = e.clientX; mouse.y = e.clientY;
+      if (!mouse.seen) { mouse.seen = true; box.x = mouse.x - 14; box.y = mouse.y - 14; cursor.classList.add('is-on'); dot.classList.add('is-on'); }
+      const t = e.target instanceof Element ? e.target : null;
+      const field = t?.closest('input:not([type="radio"]):not([type="range"]), textarea, select');
+      cursor.classList.toggle('is-hidden', !!field);
+      dot.classList.toggle('is-hidden', !!field);
+      const l = t?.closest(LOCKABLE);
+      lockEl = l && l.getBoundingClientRect().width < 480 ? l : null;
+      const lab = t?.closest('[data-cursor-label]');
+      if (lab !== labelEl) {
+        labelEl = lab;
+        if (lab) cursorLabel.textContent = lab.dataset.cursorLabel;
+        cursor.classList.toggle('has-label', !!lab && !lockEl);
+      }
+      if (lockEl) cursor.classList.remove('has-label');
+      else if (labelEl) cursor.classList.add('has-label');
+    }, { passive: true });
+    document.addEventListener('pointerleave', () => { cursor.classList.remove('is-on'); dot.classList.remove('is-on'); mouse.seen = false; });
+    window.addEventListener('pointerdown', () => cursor.classList.add('is-down'));
+    window.addEventListener('pointerup', () => cursor.classList.remove('is-down'));
+    const loop = () => {
+      let tx, ty, tw, th;
+      if (lockEl && lockEl.isConnected) {
+        const r = lockEl.getBoundingClientRect();
+        const pad = 7;
+        tx = r.left - pad; ty = r.top - pad; tw = r.width + pad * 2; th = r.height + pad * 2;
+      } else { tx = mouse.x - 14; ty = mouse.y - 14; tw = 28; th = 28; }
+      const k = lockEl ? 0.26 : 0.2;
+      box.x = lerp(box.x, tx, k); box.y = lerp(box.y, ty, k);
+      box.w = lerp(box.w, tw, 0.22); box.h = lerp(box.h, th, 0.22);
+      cursor.classList.toggle('is-locked', !!lockEl);
+      cursor.style.transform = `translate3d(${box.x}px, ${box.y}px, 0)`;
+      cursor.style.width = box.w + 'px';
+      cursor.style.height = box.h + 'px';
+      dot.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
+
+  /* ---------- Botões magnéticos e brilho ---------- */
+  if (finePointer && !reduced) {
+    $$('[data-magnetic]').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        el.style.transform = `translate(${dx * 0.22}px, ${dy * 0.32}px)`;
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+  }
+  $$('.btn--primary').forEach(el => el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--bx', (e.clientX - r.left) + 'px');
+    el.style.setProperty('--by', (e.clientY - r.top) + 'px');
+  }));
+  $$('[data-spot]').forEach(el => el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+
+  /* ---------- Campo de foco do hero (canvas) ---------- */
+  const hero = $('#hero');
+  const canvas = $('#focus-field');
+  const hud = $('#hud-coords');
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    let pts = [], W = 0, H = 0, raf = 0, heroVisible = true;
+    const fp = { x: 0, y: 0, tx: 0, ty: 0, active: false };
+    const build = () => {
+      const r = canvas.getBoundingClientRect();
+      W = r.width; H = r.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const gap = W < 640 ? 24 : 30;
+      pts = [];
+      const ox = (W % gap) / 2, oy = (H % gap) / 2;
+      for (let y = oy; y <= H; y += gap) for (let x = ox; x <= W; x += gap) pts.push(x, y);
+      if (!fp.active) { fp.x = fp.tx = W * 0.66; fp.y = fp.ty = H * 0.42; }
+    };
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      const R = W < 640 ? 150 : 240, R2 = R * R, cx = fp.x, cy = fp.y;
+      // linhas de mira
+      ctx.strokeStyle = 'rgba(139, 61, 255, 0.13)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.stroke();
+      ctx.fillStyle = 'rgba(201, 184, 255, 0.13)';
+      ctx.beginPath();
+      const near = [];
+      for (let i = 0; i < pts.length; i += 2) {
+        const x = pts[i], y = pts[i + 1], dx = x - cx, dy = y - cy, d2 = dx * dx + dy * dy;
+        if (d2 < R2) near.push(x, y, dx, dy, d2);
+        else ctx.rect(x - 0.75, y - 0.75, 1.5, 1.5);
+      }
+      ctx.fill();
+      for (let j = 0; j < near.length; j += 5) {
+        const d = Math.sqrt(near[j + 4]) || 1;
+        const t = 1 - d / R;
+        const e = t * t * (3 - 2 * t);
+        const px = near[j] + (near[j + 2] / d) * e * 16;
+        const py = near[j + 1] + (near[j + 3] / d) * e * 16;
+        ctx.fillStyle = `hsla(${266 - e * 12}, 100%, ${72 + e * 18}%, ${0.16 + e * 0.84})`;
+        ctx.beginPath(); ctx.arc(px, py, 0.8 + e * 2.4, 0, Math.PI * 2); ctx.fill();
+      }
+      // visor desenhado quando não há cursor fino
+      if (!root.classList.contains('has-cursor')) {
+        const s = 22, c = 8;
+        ctx.strokeStyle = 'rgba(201, 184, 255, 0.75)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sy]) => {
+          const x = cx + sx * s, y = cy + sy * s;
+          ctx.moveTo(x, y - sy * c); ctx.lineTo(x, y); ctx.lineTo(x - sx * c, y);
+        });
+        ctx.stroke();
+      }
+    };
+    const frame = t => {
+      if (!fp.active) {
+        fp.tx = W * (0.58 + 0.24 * Math.sin(t * 0.00032));
+        fp.ty = H * (0.42 + 0.16 * Math.sin(t * 0.00047 + 1.3));
+      }
+      fp.x = lerp(fp.x, fp.tx, 0.08);
+      fp.y = lerp(fp.y, fp.ty, 0.08);
+      draw();
+      if (hud) hud.textContent = 'X ' + String(Math.round(fp.x)).padStart(4, '0') + ' · Y ' + String(Math.round(fp.y)).padStart(4, '0');
+      raf = requestAnimationFrame(frame);
+    };
+    const start = () => { if (!raf && heroVisible && !document.hidden && !reduced) raf = requestAnimationFrame(frame); };
+    const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+    build();
+    if (reduced) draw(); else start();
+    hero.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      const r = canvas.getBoundingClientRect();
+      fp.active = true; fp.tx = e.clientX - r.left; fp.ty = e.clientY - r.top;
+    });
+    hero.addEventListener('pointerleave', () => { fp.active = false; });
+    new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; heroVisible ? start() : stop(); }).observe(hero);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    window.addEventListener('resize', () => { build(); if (reduced) draw(); });
+  }
+
+  /* ---------- Comparador ---------- */
+  const cmp = $('#compare');
+  if (cmp) {
+    const range = $('.cmp__range', cmp);
+    let dragging = false, touched = false;
+    const set = v => { v = clamp(v, 0, 100); cmp.style.setProperty('--pos', v + '%'); range.value = Math.round(v); };
+    const fromEvent = e => { const r = cmp.getBoundingClientRect(); set(((e.clientX - r.left) / r.width) * 100); };
+    cmp.addEventListener('pointerdown', e => {
+      dragging = true; touched = true; cmp.classList.add('is-dragging');
+      cmp.setPointerCapture?.(e.pointerId);
+      if (e.pointerType !== 'touch') fromEvent(e);
+    });
+    cmp.addEventListener('pointermove', e => { if (dragging) fromEvent(e); });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => cmp.addEventListener(ev, () => { dragging = false; cmp.classList.remove('is-dragging'); }));
+    range.addEventListener('input', () => { touched = true; set(+range.value); });
+    if (!reduced && 'IntersectionObserver' in window) {
+      const hint = new IntersectionObserver(([en]) => {
+        if (!en.isIntersecting) return;
+        hint.disconnect();
+        const keys = [[0, 50], [900, 24], [1900, 76], [2800, 50]];
+        const t0 = performance.now() + 500;
+        const step = now => {
+          if (touched) return;
+          const t = now - t0;
+          if (t < 0) { requestAnimationFrame(step); return; }
+          let k = 0;
+          while (k < keys.length - 2 && t > keys[k + 1][0]) k++;
+          const [ta, va] = keys[k], [tb, vb] = keys[k + 1];
+          const p = clamp((t - ta) / (tb - ta));
+          const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+          set(lerp(va, vb, e));
+          if (t < keys[keys.length - 1][0]) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }, { threshold: 0.55 });
+      hint.observe(cmp);
+    }
+  }
+
+  /* ---------- Demos dos serviços ---------- */
+  function whenVisible(el, onIn, onOut) {
+    if (!el || !('IntersectionObserver' in window)) { onIn?.(); return; }
+    new IntersectionObserver(([en]) => (en.isIntersecting ? onIn() : onOut?.()), { threshold: 0.3 }).observe(el);
+  }
+  const brand = $('[data-brand-cycle]');
+  if (brand) {
+    const themes = [
+      { bg: '#F6F1E7', fg: '#2F3B2F', ac: '#6F8F72', font: "'Cormorant Garamond', serif", style: 'normal', name: 'Cormorant Garamond', mood: 'Acolhedora', sw: ['#FBF8F1', '#EDE3D1', '#93A88F', '#C9A55B'] },
+      { bg: '#0C0C0C', fg: '#F3EDE2', ac: '#D4AF37', font: "'Space Grotesk', sans-serif", style: 'normal', name: 'Space Grotesk · caixa alta', mood: 'Premium', sw: ['#0C0C0C', '#D4AF37', '#F3EDE2', '#3A3328'] },
+      { bg: '#0A0A0B', fg: '#FAFAFA', ac: '#FF2E3D', font: "'Space Grotesk', sans-serif", style: 'italic', name: 'Grotesca inclinada', mood: 'Energia', sw: ['#0A0A0B', '#FF2E3D', '#FAFAFA', '#2A2A2E'] },
+      { bg: '#120D1F', fg: '#F6F5FA', ac: '#8B3DFF', font: "'Instrument Serif', serif", style: 'italic', name: 'Instrument Serif', mood: 'Foco', sw: ['#07070B', '#8B3DFF', '#C9B8FF', '#F6F5FA'] }
+    ];
+    const name = $('.db__name', brand), mood = $('.db__mood', brand), sws = $$('.db__sw i', brand);
+    let bi = 0, timer = 0;
+    const apply = th => {
+      brand.style.setProperty('--db-bg', th.bg); brand.style.setProperty('--db-fg', th.fg);
+      brand.style.setProperty('--db-ac', th.ac); brand.style.setProperty('--db-font', th.font);
+      brand.style.setProperty('--db-style', th.style);
+      name.textContent = th.name; mood.textContent = th.mood;
+      sws.forEach((s, i) => { s.style.background = th.sw[i]; });
+    };
+    const tick = () => { bi = (bi + 1) % themes.length; apply(themes[bi]); };
+    if (!reduced) whenVisible(brand, () => { if (!timer) timer = setInterval(tick, 2400); }, () => { clearInterval(timer); timer = 0; });
+  }
+
+  const copy = $('[data-copy]');
+  if (copy && !reduced) {
+    const before = $('[data-copy-before]', copy), after = $('[data-copy-after]', copy);
+    const pairs = [
+      ['Bem-vindo ao nosso site', 'Pão artesanal saindo do forno às 7h.'],
+      ['Somos uma empresa de qualidade', 'Seu corte agendado em poucos toques.'],
+      ['Clique aqui', 'Agendar minha avaliação']
+    ];
+    let pi = 0, running = false, token = 0;
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    const run = async my => {
+      while (running && my === token) {
+        const [b, a] = pairs[pi];
+        before.textContent = b; after.textContent = '';
+        await wait(700);
+        for (let i = 1; i <= a.length && running && my === token; i++) { after.textContent = a.slice(0, i); await wait(34 + Math.random() * 40); }
+        await wait(2400);
+        pi = (pi + 1) % pairs.length;
+      }
+    };
+    whenVisible(copy, () => { if (!running) { running = true; run(++token); } }, () => { running = false; });
+  }
+
+  /* ---------- Portfólio: rolagem horizontal fixada ---------- */
+  const works = $('#portfolio');
+  const track = $('#works-track');
+  const sticky = $('#works-sticky');
+  const worksBar = $('#works-bar');
+  const pinMQ = window.matchMedia('(min-width: 1024px) and (min-height: 620px)');
+  let pinOn = false, maxX = 0;
+  function measureWorks() {
+    if (!works) return;
+    const want = pinMQ.matches && !reduced;
+    works.classList.toggle('is-pinned', want);
+    pinOn = want;
+    if (!want) { works.style.height = ''; track.style.transform = ''; return; }
+    maxX = Math.max(0, track.scrollWidth - vw);
+    works.style.height = (maxX + vh) + 'px';
+  }
+  function updateWorks() {
+    if (!pinOn) return;
+    const r = works.getBoundingClientRect();
+    const p = clamp(-r.top / Math.max(1, works.offsetHeight - vh));
+    track.style.transform = `translate3d(${-p * maxX}px, 0, 0)`;
+    if (worksBar) worksBar.style.transform = `scaleX(${p})`;
+  }
+  // Ao navegar por teclado, leva a rolagem até o painel focado.
+  track?.addEventListener('focusin', e => {
+    if (!pinOn) return;
+    sticky.scrollLeft = 0;
+    const panel = e.target.closest('.proj, .works__intro, .works__outro');
+    if (!panel) return;
+    const x = clamp(panel.offsetLeft - (vw - panel.offsetWidth) / 2, 0, maxX);
+    const top = works.offsetTop + (maxX ? (x / maxX) * (works.offsetHeight - vh) : 0);
+    window.scrollTo({ top, behavior: 'auto' });
+  });
+
+  /* ---------- Processo ---------- */
+  const stepsEl = $('#steps');
+  const steps = $$('.step');
+  const stepsFill = $('#steps-fill');
+  const stepNum = $('#step-num');
+  function updateProcess() {
+    if (!stepsEl) return;
+    const r = stepsEl.getBoundingClientRect();
+    if (r.bottom < -200 || r.top > vh + 200) return;
+    const p = clamp((vh * 0.6 - r.top) / r.height);
+    stepsFill.style.transform = `scaleY(${p})`;
+    let active = 0;
+    steps.forEach((s, i) => { if (s.getBoundingClientRect().top < vh * 0.6) active = i; });
+    steps.forEach((s, i) => { s.classList.toggle('is-active', i === active); s.classList.toggle('is-past', i < active); });
+    if (stepNum) stepNum.textContent = String(active + 1).padStart(2, '0');
+  }
+
+  /* ---------- Manifesto ---------- */
+  let manLit = -1;
+  function updateManifesto() {
+    if (!manifesto || reduced) return;
+    const r = manifesto.getBoundingClientRect();
+    if (r.bottom < -100 || r.top > vh + 100) return;
+    const p = clamp((vh * 0.85 - r.top) / (vh * 0.4 + r.height));
+    const n = Math.round(p * manWords.length);
+    if (n !== manLit) { manWords.forEach((w, i) => w.classList.toggle('on', i < n)); manLit = n; }
+  }
+
+  /* ---------- Ticker com inclinação pela velocidade ---------- */
+  const ticker = $('#ticker');
+  let skew = 0, skewRaf = 0;
+  function kickTicker(dy) {
+    if (!ticker || reduced) return;
+    skew = clamp(skew + dy * -0.04, -7, 7);
+    if (!skewRaf) skewRaf = requestAnimationFrame(decay);
+  }
+  function decay() {
+    skew *= 0.9;
+    ticker.style.transform = `skewX(${skew.toFixed(2)}deg)`;
+    if (Math.abs(skew) > 0.02) skewRaf = requestAnimationFrame(decay);
+    else { ticker.style.transform = ''; skewRaf = 0; }
+  }
+
+  /* ---------- Dock mobile ---------- */
+  const dock = $('#dock');
+  const contact = $('#contato');
+  const footer = $('#footer');
+  let contactVisible = false;
+  if (contact && 'IntersectionObserver' in window) {
+    const dio = new IntersectionObserver(es => { es.forEach(en => { en.target.dataset.vis = en.isIntersecting ? '1' : ''; }); contactVisible = contact.dataset.vis === '1' || footer.dataset.vis === '1'; onScroll(); }, { threshold: 0.05 });
+    dio.observe(contact); dio.observe(footer);
+  }
+
+  /* ---------- Loop de rolagem ---------- */
+  const progress = $('#scroll-progress');
+  let lastY = window.scrollY, ticking = false;
+  function onScroll() {
+    const y = window.scrollY;
+    const dy = y - lastY;
+    header.classList.toggle('is-scrolled', y > 20);
+    if (!menuOpen && !header.contains(document.activeElement)) {
+      if (dy > 4 && y > 500) header.classList.add('is-hidden');
+      else if (dy < -4 || y < 500) header.classList.remove('is-hidden');
+    }
+    const max = document.documentElement.scrollHeight - vh;
+    if (progress) progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    if (dock) dock.classList.toggle('is-visible', y > vh * 0.8 && !contactVisible && !menuOpen);
+    let current = null;
+    navTargets.forEach((t, i) => { if (t.getBoundingClientRect().top < vh * 0.4) current = i; });
+    navLinks.forEach((a, i) => a.classList.toggle('is-active', i === current));
+    kickTicker(dy);
+    updateManifesto();
+    updateWorks();
+    updateProcess();
+    lastY = y;
+  }
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { ticking = false; onScroll(); });
+  }, { passive: true });
+  window.addEventListener('resize', () => {
+    vw = window.innerWidth; vh = window.innerHeight;
+    if (vw >= 1024 && menuOpen) setMenu(false);
+    measureWorks(); onScroll();
+  });
+  measureWorks();
+  onScroll();
+  document.fonts?.ready.then(() => { measureWorks(); onScroll(); });
+  window.addEventListener('load', () => { measureWorks(); onScroll(); });
+
+  /* ---------- Rodapé: marca iluminada pelo cursor ---------- */
+  const mark = $('#footer-mark');
+  if (mark && finePointer) {
+    footer.addEventListener('pointermove', e => {
+      const r = mark.getBoundingClientRect();
+      mark.style.setProperty('--fx', ((e.clientX - r.left) / r.width) * 100 + '%');
+      mark.style.setProperty('--fy', ((e.clientY - r.top) / r.height) * 100 + '%');
+    });
+  }
+
+  /* ---------- Modais do portfólio ---------- */
   let activeModal = null;
   let previousFocus = null;
   function closeModal() {
     if (!activeModal) return;
     activeModal.classList.remove('is-open');
     activeModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('cf-no-scroll');
+    document.body.classList.remove('no-scroll');
     activeModal = null;
-    previousFocus?.focus();
+    previousFocus?.focus({ preventScroll: true });
   }
-  document.querySelectorAll('[data-project]').forEach(button => button.addEventListener('click', () => {
-    closeMenu();
-    const next = document.getElementById('project-' + button.dataset.project);
+  function openModal(id, opener) {
+    const next = document.getElementById('project-' + id);
     if (!next) return;
+    if (menuOpen) setMenu(false);
     closeModal();
-    previousFocus = button;
+    previousFocus = opener;
     activeModal = next;
     next.classList.add('is-open');
     next.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('cf-no-scroll');
-    next.querySelector('.cf-modal__close')?.focus();
+    document.body.classList.add('no-scroll');
+    $('.modal__close', next)?.focus({ preventScroll: true });
+  }
+  $$('[data-project]').forEach(btn => btn.addEventListener('click', () => openModal(btn.dataset.project, btn)));
+  $$('[data-open-project]').forEach(media => media.addEventListener('click', () => {
+    const id = media.dataset.openProject;
+    openModal(id, $(`[data-project="${id}"]`));
   }));
-  document.querySelectorAll('.cf-modal').forEach(modal => {
-    modal.querySelector('.cf-modal__close')?.addEventListener('click', closeModal);
-    modal.querySelectorAll('[data-close-modal]').forEach(a => a.addEventListener('click', closeModal));
+  $$('.modal').forEach(modal => {
+    $('.modal__close', modal)?.addEventListener('click', closeModal);
+    $$('[data-close-modal]', modal).forEach(a => a.addEventListener('click', closeModal));
     modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeModal(); closeMenu(); }
+    if (e.key === 'Escape') { closeModal(); if (menuOpen) { setMenu(false); toggle.focus(); } }
     if (e.key === 'Tab' && activeModal) {
-      const nodes = Array.from(activeModal.querySelectorAll('button:not([disabled]),a[href],input,select,textarea')).filter(el => el.offsetParent !== null);
+      const nodes = $$('button:not([disabled]), a[href], input, select, textarea', activeModal).filter(el => el.offsetParent !== null);
       if (!nodes.length) return;
       const first = nodes[0], last = nodes[nodes.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -74,51 +511,64 @@
     }
   });
 
-  // FAQ
-  document.querySelectorAll('.cf-faq__trigger').forEach(btn => btn.addEventListener('click', () => {
-    const item = btn.closest('.cf-faq__item');
-    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+  /* ---------- FAQ ---------- */
+  const faqTriggers = $$('.faq__trigger');
+  faqTriggers.forEach(btn => btn.addEventListener('click', () => {
     const nowOpen = btn.getAttribute('aria-expanded') !== 'true';
-    document.querySelectorAll('.cf-faq__trigger').forEach(other => {
+    faqTriggers.forEach(other => {
       other.setAttribute('aria-expanded', 'false');
-      other.closest('.cf-faq__item')?.classList.remove('is-open');
-      const otherPanel = document.getElementById(other.getAttribute('aria-controls'));
-      if (otherPanel) otherPanel.hidden = true;
+      other.closest('.faq__item')?.classList.remove('is-open');
     });
     btn.setAttribute('aria-expanded', String(nowOpen));
-    item?.classList.toggle('is-open', nowOpen);
-    if (panel) panel.hidden = !nowOpen;
+    btn.closest('.faq__item')?.classList.toggle('is-open', nowOpen);
   }));
 
-  const emailNote = document.getElementById('contact-email-note');
-  const emailLink = document.getElementById('contact-email-link');
-  const configuredEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(CONTACT_EMAIL);
-  if (configuredEmail && emailLink) {
-    emailLink.href = 'mailto:' + CONTACT_EMAIL;
-    emailLink.textContent = CONTACT_EMAIL;
-    emailLink.hidden = false;
-    if (emailNote) emailNote.hidden = true;
-  }
-  const waLink = document.getElementById('whatsapp-link');
-  const waNote = document.getElementById('whatsapp-note');
+  /* ---------- Contatos configurados ---------- */
+  const emailLink = $('#contact-email-link');
+  if (emailLink && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(CONTACT_EMAIL)) emailLink.href = 'mailto:' + CONTACT_EMAIL;
   const activeBusiness = /^\d{12,13}$/.test(WHATSAPP_BUSINESS);
-  const contactSubmit = document.getElementById('contact-submit');
-  const formDisclosure = document.querySelector('#contact-form .cf-small');
-  if (activeBusiness) {
-    if (contactSubmit) contactSubmit.textContent = 'Continuar no WhatsApp';
-    if (formDisclosure) formDisclosure.textContent = 'Abriremos o WhatsApp com sua mensagem preenchida. Confira os dados e toque em enviar: nenhum briefing é enviado automaticamente.';
-  }
-  if (activeBusiness && waLink) {
-    waLink.hidden = false;
-    waLink.href = 'https://wa.me/' + WHATSAPP_BUSINESS + '?text=' + encodeURIComponent('Olá! Encontrei a ClickFocus pelo site e gostaria de pedir um orçamento.');
-    if (waNote) waNote.textContent = 'Atendimento pelo número (27) 99224-9680. Envie sua mensagem pelo botão abaixo.';
+  const submitLabel = $('#contact-submit-label');
+  const disclosure = $('#form-disclosure');
+  const waLink = $('#whatsapp-link');
+  if (!activeBusiness) {
+    if (submitLabel) submitLabel.textContent = 'Copiar meu briefing';
+    if (disclosure) disclosure.textContent = 'O canal de atendimento está sendo preparado. Por enquanto, o formulário apenas copia o briefing: nenhuma solicitação é enviada à ClickFocus.';
+    if (waLink) waLink.hidden = true;
+  } else if (waLink) {
+    waLink.href = 'https://wa.me/' + WHATSAPP_BUSINESS + '?text=' + encodeURIComponent('Olá! Encontrei a ClickFocus pelo site e gostaria de solicitar um orçamento.');
   }
 
-  const form = document.getElementById('contact-form');
-  const feedback = document.getElementById('contact-feedback');
+  /* ---------- Formulário + prévia ao vivo ---------- */
+  const form = $('#contact-form');
+  const feedback = $('#contact-feedback');
+  const preview = $('#brief-preview');
+  const previewTime = $('#brief-time');
+  function buildBriefing(data, placeholder) {
+    const v = (k, fb) => String(data.get(k) || '').trim() || fb;
+    return [
+      'Olá, ClickFocus! Gostaria de solicitar um orçamento de landing page.',
+      'Nome: ' + v('name', placeholder ? '—' : ''),
+      'E-mail: ' + v('email', placeholder ? '—' : ''),
+      'WhatsApp: ' + v('phone', 'Não informado'),
+      'Projeto: ' + v('projectType', ''),
+      'Sobre: ' + v('message', placeholder ? '—' : '')
+    ].join('\n');
+  }
+  function updatePreview() {
+    if (!form || !preview) return;
+    preview.textContent = buildBriefing(new FormData(form), true);
+    if (previewTime) {
+      const d = new Date();
+      previewTime.textContent = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    }
+  }
+  form?.addEventListener('input', updatePreview);
+  form?.addEventListener('change', updatePreview);
+  updatePreview();
+
   function notify(message, type) {
     feedback.textContent = message;
-    feedback.className = 'cf-form__feedback is-visible cf-form__feedback--' + type;
+    feedback.className = 'form__feedback is-visible form__feedback--' + type;
   }
   form?.addEventListener('submit', async e => {
     e.preventDefault();
@@ -127,18 +577,9 @@
       notify('Confira os campos obrigatórios antes de continuar.', 'err');
       return;
     }
-    const data = new FormData(form);
-    const briefing = [
-      'Olá, ClickFocus! Gostaria de solicitar um orçamento de landing page.',
-      'Nome: ' + String(data.get('name') || '').trim(),
-      'E-mail: ' + String(data.get('email') || '').trim(),
-      'WhatsApp: ' + String(data.get('phone') || 'Não informado').trim(),
-      'Projeto: ' + String(data.get('projectType') || ''),
-      'Sobre: ' + String(data.get('message') || '').trim()
-    ].join('\n');
+    const briefing = buildBriefing(new FormData(form), false);
     if (activeBusiness) {
-      const conversation = 'https://wa.me/' + WHATSAPP_BUSINESS + '?text=' + encodeURIComponent(briefing);
-      window.open(conversation, '_blank', 'noopener,noreferrer');
+      window.open('https://wa.me/' + WHATSAPP_BUSINESS + '?text=' + encodeURIComponent(briefing), '_blank', 'noopener,noreferrer');
       notify('O WhatsApp foi solicitado em uma nova aba. Se seu navegador bloquear a abertura, permita o pop-up e tente novamente. Revise e envie a mensagem no aplicativo.', 'ok');
       return;
     }

@@ -21,6 +21,18 @@ A **ClickFocus** é uma iniciativa especializada na criação de landing pages p
 - Design responsivo, menu mobile e componentes interativos.
 - Código independente do SITE123, com HTML, CSS e JavaScript puro.
 
+### Experiência "Modo Foco"
+
+A página demonstra na prática o conceito da marca — atenção onde importa:
+
+- **Cursor-visor** (desktop): cantos de câmera que "travam" em botões e links.
+- **Hero com autofoco**: o título entra desfocado, "caça" o foco e trava no destaque; ao fundo, um campo de pontos (canvas) reage à posição do cursor.
+- **Comparador "Sem foco × Com foco"**: ilustração arrastável (mouse, toque ou teclado) com um negócio fictício.
+- **Serviços em bento** com mini-demonstrações animadas (layout, paleta, copy, responsividade, semântica e publicação).
+- **Portfólio em rolagem horizontal** fixada no desktop, cada projeto com as cores da própria marca; no celular vira uma lista vertical.
+- **Prévia ao vivo** da mensagem que será aberta no WhatsApp enquanto o formulário é preenchido.
+- Respeita `prefers-reduced-motion`, funciona sem JavaScript (conteúdo visível) e mantém navegação por teclado.
+
 ## Portfólio demonstrativo
 
 | Projeto | Conceito visual | Demonstração |
@@ -70,7 +82,7 @@ Mensagens podem ser enviadas a qualquer momento, mas as respostas são realizada
 ## Identidade visual
 
 - **Paleta principal:** preto `#0B0B10`, roxo elétrico `#8B3DFF` e branco.
-- **Tipografia:** Space Grotesk e Inter.
+- **Tipografia:** Space Grotesk (títulos), Instrument Serif itálica (acentos), Inter (texto) e JetBrains Mono (rótulos).
 - **Marca:** logotipo vetorizado a partir do desenho aprovado de **página/janela + cursor**.
 
 Arquivos em `assets/`:
@@ -96,7 +108,6 @@ Abra [http://localhost:8000](http://localhost:8000) ou abra `index.html` diretam
 └── assets/
     ├── app.js
     ├── site.css
-    ├── components.css
     ├── clickfocus-logo.svg
     ├── clickfocus-logo-dark.svg
     └── favicon.svg
