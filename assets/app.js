@@ -9,8 +9,8 @@
   // Endereços dos sites demonstrativos. Depois de publicar no Vercel, cole a URL aqui
   // (ex.: 'https://solare-beach-tennis.vercel.app/') e o botão "Visitar site" aparece sozinho.
   const DEMO_URLS = {
-    solare: '',
-    veio: ''
+    solare: 'https://solare-beach-tennis.vercel.app',
+    veio: 'https://marcenaria-veio.vercel.app'
   };
   Object.entries(DEMO_URLS).forEach(([id, url]) => {
     if (!/^https?:\/\//.test(url)) return;
