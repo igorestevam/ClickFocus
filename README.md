@@ -9,7 +9,7 @@
 
 # ClickFocus — site oficial e portfólio
 
-A **ClickFocus** é uma iniciativa especializada na criação de landing pages para pequenos e médios negócios, com foco em **arenas de beach tennis** e **marcenarias**. Este repositório reúne o site institucional, a apresentação dos serviços e as prévias de cinco projetos demonstrativos.
+A **ClickFocus** é uma iniciativa especializada na criação de landing pages para pequenos e médios negócios. Este repositório reúne o site institucional, a apresentação dos serviços e as prévias de cinco projetos demonstrativos.
 
 **Tom dos textos:** o público é formado por donos de negócio que não são da área de tecnologia. Os textos evitam jargão ("copy", "mobile-first", "briefing" etc.) e explicam em uma frase os termos inevitáveis, como domínio e hospedagem.
 
