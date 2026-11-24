@@ -91,14 +91,22 @@
   const mouse = { x: vw / 2, y: vh / 2, seen: false };
   if (finePointer && !reduced && cursor) {
     root.classList.add('has-cursor');
-    const box = { x: mouse.x - 14, y: mouse.y - 14, w: 28, h: 28 };
+    // Posição pelo centro: livre = segue o mouse sem atraso; travado = desliza até o botão.
+    const box = { cx: mouse.x, cy: mouse.y, w: 28, h: 28 };
     let lockEl = null;
     let labelEl = null;
+    let lockedClass = false;
     const LOCKABLE = 'a, button, .chip, [data-lock]';
+    const paint = () => {
+      cursor.style.transform = `translate3d(${box.cx - box.w / 2}px, ${box.cy - box.h / 2}px, 0)`;
+      cursor.style.width = box.w + 'px';
+      cursor.style.height = box.h + 'px';
+    };
     window.addEventListener('pointermove', e => {
       if (e.pointerType !== 'mouse') return;
       mouse.x = e.clientX; mouse.y = e.clientY;
-      if (!mouse.seen) { mouse.seen = true; box.x = mouse.x - 14; box.y = mouse.y - 14; cursor.classList.add('is-on'); dot.classList.add('is-on'); }
+      dot.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
+      if (!mouse.seen) { mouse.seen = true; cursor.classList.add('is-on'); dot.classList.add('is-on'); }
       const t = e.target instanceof Element ? e.target : null;
       const field = t?.closest('input:not([type="radio"]):not([type="range"]), textarea, select');
       cursor.classList.toggle('is-hidden', !!field);
@@ -113,25 +121,26 @@
       }
       if (lockEl) cursor.classList.remove('has-label');
       else if (labelEl) cursor.classList.add('has-label');
+      if (!lockEl) { box.cx = mouse.x; box.cy = mouse.y; paint(); }
     }, { passive: true });
     document.addEventListener('pointerleave', () => { cursor.classList.remove('is-on'); dot.classList.remove('is-on'); mouse.seen = false; });
     window.addEventListener('pointerdown', () => cursor.classList.add('is-down'));
     window.addEventListener('pointerup', () => cursor.classList.remove('is-down'));
     const loop = () => {
-      let tx, ty, tw, th;
-      if (lockEl && lockEl.isConnected) {
+      const locked = !!(lockEl && lockEl.isConnected);
+      let tw = 28, th = 28;
+      if (locked) {
         const r = lockEl.getBoundingClientRect();
         const pad = 7;
-        tx = r.left - pad; ty = r.top - pad; tw = r.width + pad * 2; th = r.height + pad * 2;
-      } else { tx = mouse.x - 14; ty = mouse.y - 14; tw = 28; th = 28; }
-      const k = lockEl ? 0.26 : 0.2;
-      box.x = lerp(box.x, tx, k); box.y = lerp(box.y, ty, k);
-      box.w = lerp(box.w, tw, 0.22); box.h = lerp(box.h, th, 0.22);
-      cursor.classList.toggle('is-locked', !!lockEl);
-      cursor.style.transform = `translate3d(${box.x}px, ${box.y}px, 0)`;
-      cursor.style.width = box.w + 'px';
-      cursor.style.height = box.h + 'px';
-      dot.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
+        tw = r.width + pad * 2; th = r.height + pad * 2;
+        box.cx = lerp(box.cx, r.left + r.width / 2, 0.35);
+        box.cy = lerp(box.cy, r.top + r.height / 2, 0.35);
+      } else { box.cx = mouse.x; box.cy = mouse.y; }
+      const k = 0.35;
+      box.w = Math.abs(box.w - tw) < 0.3 ? tw : lerp(box.w, tw, k);
+      box.h = Math.abs(box.h - th) < 0.3 ? th : lerp(box.h, th, k);
+      if (locked !== lockedClass) { lockedClass = locked; cursor.classList.toggle('is-locked', locked); }
+      paint();
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
@@ -294,7 +303,7 @@
       { bg: '#F6F1E7', fg: '#2F3B2F', ac: '#6F8F72', font: "'Cormorant Garamond', serif", style: 'normal', name: 'Cormorant Garamond', mood: 'Acolhedora', sw: ['#FBF8F1', '#EDE3D1', '#93A88F', '#C9A55B'] },
       { bg: '#0C0C0C', fg: '#F3EDE2', ac: '#D4AF37', font: "'Space Grotesk', sans-serif", style: 'normal', name: 'Space Grotesk · caixa alta', mood: 'Premium', sw: ['#0C0C0C', '#D4AF37', '#F3EDE2', '#3A3328'] },
       { bg: '#0A0A0B', fg: '#FAFAFA', ac: '#FF2E3D', font: "'Space Grotesk', sans-serif", style: 'italic', name: 'Grotesca inclinada', mood: 'Energia', sw: ['#0A0A0B', '#FF2E3D', '#FAFAFA', '#2A2A2E'] },
-      { bg: '#120D1F', fg: '#F6F5FA', ac: '#8B3DFF', font: "'Instrument Serif', serif", style: 'italic', name: 'Instrument Serif', mood: 'Foco', sw: ['#07070B', '#8B3DFF', '#C9B8FF', '#F6F5FA'] }
+      { bg: '#120D1F', fg: '#F6F5FA', ac: '#8B3DFF', font: "'Space Grotesk', sans-serif", style: 'normal', name: 'Space Grotesk', mood: 'Foco', sw: ['#07070B', '#8B3DFF', '#C9B8FF', '#F6F5FA'] }
     ];
     const name = $('.db__name', brand), mood = $('.db__mood', brand), sws = $$('.db__sw i', brand);
     let bi = 0, timer = 0;

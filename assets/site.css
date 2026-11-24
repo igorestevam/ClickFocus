@@ -1,7 +1,7 @@
 /* =========================================================
    ClickFocus — "Modo Foco"
    Identidade: preto #07070B · roxo elétrico #8B3DFF · branco
-   Tipografia: Space Grotesk (display) · Instrument Serif (acento)
+   Tipografia: Space Grotesk (display, destaques em roxo)
                Inter (texto) · JetBrains Mono (rótulos/HUD)
    ========================================================= */
 
@@ -23,7 +23,6 @@
   --muted: #A6A6B6;
   --dim: #82828F;
   --f-display: 'Space Grotesk', system-ui, sans-serif;
-  --f-serif: 'Instrument Serif', Georgia, serif;
   --f-body: 'Inter', system-ui, sans-serif;
   --f-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   --ease: cubic-bezier(.22, 1, .36, 1);
@@ -77,11 +76,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* ---------- Tipografia ---------- */
 .h2 { font-size: clamp(2.2rem, 5.4vw, 4.6rem); line-height: 1; letter-spacing: -.05em; font-weight: 600; }
 .h2 em, .hero__title em, .manifesto em, .contact__title em, .works__outro-h em {
-  font-family: var(--f-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -.01em;
-  padding-right: .04em;
+  font-style: normal;
   background: var(--grad);
   -webkit-background-clip: text;
   background-clip: text;
@@ -297,7 +292,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .hl { display: block; }
 .hl__in { display: inline-block; }
-.hero__title em { font-size: 1.07em; line-height: .8; }
 .hero__dot { color: var(--violet); }
 .lock { position: relative; display: inline-block; }
 .lock__frame { position: absolute; inset: .02em -.1em -.02em -.06em; pointer-events: none; }

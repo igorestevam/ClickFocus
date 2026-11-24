@@ -82,7 +82,7 @@ Mensagens podem ser enviadas a qualquer momento, mas as respostas são realizada
 ## Identidade visual
 
 - **Paleta principal:** preto `#0B0B10`, roxo elétrico `#8B3DFF` e branco.
-- **Tipografia:** Space Grotesk (títulos), Instrument Serif itálica (acentos), Inter (texto) e JetBrains Mono (rótulos).
+- **Tipografia:** Space Grotesk (títulos, com destaques em degradê roxo), Inter (texto) e JetBrains Mono (rótulos).
 - **Marca:** logotipo vetorizado a partir do desenho aprovado de **página/janela + cursor**.
 
 Arquivos em `assets/`:
