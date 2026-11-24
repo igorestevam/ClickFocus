@@ -84,66 +84,54 @@
   const navLinks = $$('.hdr__nav a');
   const navTargets = navLinks.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
 
-  /* ---------- Cursor-visor ---------- */
+  /* ---------- Visor de foco nos botões (cursor do sistema continua normal) ---------- */
   const cursor = $('#cursor');
-  const dot = $('#cursor-dot');
-  const cursorLabel = $('#cursor-label');
-  const mouse = { x: vw / 2, y: vh / 2, seen: false };
   if (finePointer && !reduced && cursor) {
-    root.classList.add('has-cursor');
-    // Posição pelo centro: livre = segue o mouse sem atraso; travado = desliza até o botão.
-    const box = { cx: mouse.x, cy: mouse.y, w: 28, h: 28 };
-    let lockEl = null;
-    let labelEl = null;
-    let lockedClass = false;
     const LOCKABLE = 'a, button, .chip, [data-lock]';
+    const box = { cx: 0, cy: 0, w: 0, h: 0 };
+    let lockEl = null, raf = 0;
     const paint = () => {
       cursor.style.transform = `translate3d(${box.cx - box.w / 2}px, ${box.cy - box.h / 2}px, 0)`;
       cursor.style.width = box.w + 'px';
       cursor.style.height = box.h + 'px';
     };
-    window.addEventListener('pointermove', e => {
+    const loop = () => {
+      raf = 0;
+      if (!lockEl || !lockEl.isConnected) return;
+      const r = lockEl.getBoundingClientRect();
+      const pad = 7;
+      const tw = r.width + pad * 2, th = r.height + pad * 2;
+      box.cx = lerp(box.cx, r.left + r.width / 2, 0.3);
+      box.cy = lerp(box.cy, r.top + r.height / 2, 0.3);
+      box.w = lerp(box.w, tw, 0.22);
+      box.h = lerp(box.h, th, 0.22);
+      paint();
+      raf = requestAnimationFrame(loop);
+    };
+    document.addEventListener('pointerover', e => {
       if (e.pointerType !== 'mouse') return;
-      mouse.x = e.clientX; mouse.y = e.clientY;
-      dot.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
-      if (!mouse.seen) { mouse.seen = true; cursor.classList.add('is-on'); dot.classList.add('is-on'); }
-      const t = e.target instanceof Element ? e.target : null;
-      const field = t?.closest('input:not([type="radio"]):not([type="range"]), textarea, select');
-      cursor.classList.toggle('is-hidden', !!field);
-      dot.classList.toggle('is-hidden', !!field);
-      const l = t?.closest(LOCKABLE);
-      lockEl = l && l.getBoundingClientRect().width < 480 ? l : null;
-      const lab = t?.closest('[data-cursor-label]');
-      if (lab !== labelEl) {
-        labelEl = lab;
-        if (lab) cursorLabel.textContent = lab.dataset.cursorLabel;
-        cursor.classList.toggle('has-label', !!lab && !lockEl);
+      const el = e.target instanceof Element ? e.target.closest(LOCKABLE) : null;
+      if (!el || el === lockEl || el.getBoundingClientRect().width > 480) return;
+      const r = el.getBoundingClientRect();
+      if (!lockEl) {
+        // Entra maior e "fecha" no botão, como um foco travando.
+        box.cx = r.left + r.width / 2; box.cy = r.top + r.height / 2;
+        box.w = r.width * 1.35 + 30; box.h = r.height * 1.35 + 30;
+        paint();
       }
-      if (lockEl) cursor.classList.remove('has-label');
-      else if (labelEl) cursor.classList.add('has-label');
-      if (!lockEl) { box.cx = mouse.x; box.cy = mouse.y; paint(); }
-    }, { passive: true });
-    document.addEventListener('pointerleave', () => { cursor.classList.remove('is-on'); dot.classList.remove('is-on'); mouse.seen = false; });
+      lockEl = el;
+      cursor.classList.add('is-on', 'is-locked');
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    document.addEventListener('pointerout', e => {
+      if (!lockEl || e.pointerType !== 'mouse') return;
+      const to = e.relatedTarget instanceof Element ? e.relatedTarget.closest(LOCKABLE) : null;
+      if (to === lockEl) return;
+      lockEl = null;
+      cursor.classList.remove('is-on', 'is-locked');
+    });
     window.addEventListener('pointerdown', () => cursor.classList.add('is-down'));
     window.addEventListener('pointerup', () => cursor.classList.remove('is-down'));
-    const loop = () => {
-      const locked = !!(lockEl && lockEl.isConnected);
-      let tw = 28, th = 28;
-      if (locked) {
-        const r = lockEl.getBoundingClientRect();
-        const pad = 7;
-        tw = r.width + pad * 2; th = r.height + pad * 2;
-        box.cx = lerp(box.cx, r.left + r.width / 2, 0.35);
-        box.cy = lerp(box.cy, r.top + r.height / 2, 0.35);
-      } else { box.cx = mouse.x; box.cy = mouse.y; }
-      const k = 0.35;
-      box.w = Math.abs(box.w - tw) < 0.3 ? tw : lerp(box.w, tw, k);
-      box.h = Math.abs(box.h - th) < 0.3 ? th : lerp(box.h, th, k);
-      if (locked !== lockedClass) { lockedClass = locked; cursor.classList.toggle('is-locked', locked); }
-      paint();
-      requestAnimationFrame(loop);
-    };
-    requestAnimationFrame(loop);
   }
 
   /* ---------- Botões magnéticos e brilho ---------- */
@@ -214,8 +202,8 @@
         ctx.fillStyle = `hsla(${266 - e * 12}, 100%, ${72 + e * 18}%, ${0.16 + e * 0.84})`;
         ctx.beginPath(); ctx.arc(px, py, 0.8 + e * 2.4, 0, Math.PI * 2); ctx.fill();
       }
-      // visor desenhado quando não há cursor fino
-      if (!root.classList.contains('has-cursor')) {
+      // visor desenhado enquanto o foco se move sozinho
+      if (!fp.active) {
         const s = 22, c = 8;
         ctx.strokeStyle = 'rgba(201, 184, 255, 0.75)';
         ctx.lineWidth = 1.5;

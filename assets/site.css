@@ -142,42 +142,20 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .progress { position: fixed; inset: 0 0 auto; z-index: 120; height: 2px; pointer-events: none; }
 .progress span { display: block; height: 100%; background: var(--grad); transform: scaleX(0); transform-origin: 0 50%; }
 
-.cursor, .cursor-dot { display: none; }
-.has-cursor .cursor, .has-cursor .cursor-dot { display: block; }
-.has-cursor, .has-cursor a, .has-cursor button, .has-cursor label, .has-cursor [data-cursor-label] { cursor: none; }
-.has-cursor input:not([type='radio']):not([type='range']), .has-cursor textarea { cursor: text; }
+/* Visor de foco: aparece só em botões e links (o cursor do sistema continua normal) */
 .cursor {
-  position: fixed; left: 0; top: 0; z-index: 250; width: 28px; height: 28px;
-  pointer-events: none; opacity: 0; transition: opacity .3s;
+  position: fixed; left: 0; top: 0; z-index: 250; width: 0; height: 0;
+  pointer-events: none; opacity: 0; transition: opacity .25s;
   will-change: transform, width, height;
-  filter: drop-shadow(0 0 1px rgba(0, 0, 0, .7));
 }
 .cursor.is-on { opacity: 1; }
-.cursor.is-hidden { opacity: 0; }
-.cursor > i {
-  position: absolute; width: 8px; height: 8px; border: 1.5px solid #fff;
-  transition: width .3s var(--ease), height .3s var(--ease), border-color .3s;
-}
+.cursor > i { position: absolute; width: 11px; height: 11px; border: 1.5px solid var(--lilac); transition: border-color .3s; }
 .cursor > i:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; }
 .cursor > i:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; }
 .cursor > i:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; }
 .cursor > i:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; }
-.cursor.is-locked > i { width: 11px; height: 11px; border-color: var(--lilac); }
 .cursor.is-down > i { border-color: var(--violet-2); }
-.cursor__label {
-  position: absolute; left: calc(100% + 10px); top: 50%;
-  padding: 5px 9px; border-radius: 6px; background: var(--violet); color: #fff;
-  font: 500 .66rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap;
-  opacity: 0; transform: translate(-6px, -50%); transition: opacity .25s, transform .35s var(--ease);
-}
-.cursor.has-label .cursor__label { opacity: 1; transform: translate(0, -50%); }
-.cursor-dot {
-  position: fixed; left: -3px; top: -3px; z-index: 251; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--violet-2); pointer-events: none; box-shadow: 0 0 12px rgba(163, 102, 255, .9);
-  opacity: 0; transition: opacity .3s;
-}
-.cursor-dot.is-on { opacity: 1; }
-.cursor-dot.is-hidden { opacity: 0; }
+.cmp { cursor: ew-resize; }
 
 /* ---------- Cabeçalho ---------- */
 .hdr {
