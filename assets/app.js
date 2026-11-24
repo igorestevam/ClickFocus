@@ -6,6 +6,18 @@
   const WHATSAPP_BUSINESS = '5527992249680';
   const CONTACT_EMAIL = 'igorestevam1900@gmail.com';
 
+  // Endereços dos sites demonstrativos. Depois de publicar no Vercel, cole a URL aqui
+  // (ex.: 'https://solare-beach-tennis.vercel.app/') e o botão "Visitar site" aparece sozinho.
+  const DEMO_URLS = {
+    solare: '',
+    veio: ''
+  };
+  Object.entries(DEMO_URLS).forEach(([id, url]) => {
+    if (!/^https?:\/\//.test(url)) return;
+    document.querySelectorAll(`[data-demo-link="${id}"]`).forEach(a => { a.href = url; a.hidden = false; });
+    document.querySelectorAll(`[data-demo-host="${id}"]`).forEach(el => { el.textContent = url.replace(/^https?:\/\//, '').replace(/\/$/, ''); });
+  });
+
   const root = document.documentElement;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -288,10 +300,10 @@
   const brand = $('[data-brand-cycle]');
   if (brand) {
     const themes = [
-      { bg: '#F6F1E7', fg: '#2F3B2F', ac: '#6F8F72', font: "'Cormorant Garamond', serif", style: 'normal', name: 'Cormorant Garamond', mood: 'Acolhedora', sw: ['#FBF8F1', '#EDE3D1', '#93A88F', '#C9A55B'] },
-      { bg: '#0C0C0C', fg: '#F3EDE2', ac: '#D4AF37', font: "'Space Grotesk', sans-serif", style: 'normal', name: 'Space Grotesk · caixa alta', mood: 'Premium', sw: ['#0C0C0C', '#D4AF37', '#F3EDE2', '#3A3328'] },
-      { bg: '#0A0A0B', fg: '#FAFAFA', ac: '#FF2E3D', font: "'Space Grotesk', sans-serif", style: 'italic', name: 'Grotesca inclinada', mood: 'Energia', sw: ['#0A0A0B', '#FF2E3D', '#FAFAFA', '#2A2A2E'] },
-      { bg: '#120D1F', fg: '#F6F5FA', ac: '#8B3DFF', font: "'Space Grotesk', sans-serif", style: 'normal', name: 'Space Grotesk', mood: 'Foco', sw: ['#07070B', '#8B3DFF', '#C9B8FF', '#F6F5FA'] }
+      { bg: '#F7EEDF', fg: '#0D2B3A', ac: '#FF7A3D', font: "'Space Grotesk', sans-serif", style: 'normal', name: 'Arena de beach tennis', mood: 'Ensolarada', sw: ['#F7EEDF', '#0D2B3A', '#0B8A8F', '#FF7A3D'] },
+      { bg: '#2A1F17', fg: '#F5F0E8', ac: '#C48D57', font: "'Cormorant Garamond', serif", style: 'normal', name: 'Marcenaria', mood: 'Artesanal', sw: ['#F5F0E8', '#C48D57', '#6E7A57', '#2A1F17'] },
+      { bg: '#F6F1E7', fg: '#2F3B2F', ac: '#6F8F72', font: "'Cormorant Garamond', serif", style: 'normal', name: 'Clínica de estética', mood: 'Acolhedora', sw: ['#FBF8F1', '#EDE3D1', '#93A88F', '#C9A55B'] },
+      { bg: '#0A0A0B', fg: '#FAFAFA', ac: '#FF2E3D', font: "'Space Grotesk', sans-serif", style: 'italic', name: 'Academia', mood: 'Energia', sw: ['#0A0A0B', '#FF2E3D', '#FAFAFA', '#2A2A2E'] }
     ];
     const name = $('.db__name', brand), mood = $('.db__mood', brand), sws = $$('.db__sw i', brand);
     let bi = 0, timer = 0;
@@ -303,6 +315,7 @@
       sws.forEach((s, i) => { s.style.background = th.sw[i]; });
     };
     const tick = () => { bi = (bi + 1) % themes.length; apply(themes[bi]); };
+    apply(themes[0]);
     if (!reduced) whenVisible(brand, () => { if (!timer) timer = setInterval(tick, 2400); }, () => { clearInterval(timer); timer = 0; });
   }
 
@@ -310,9 +323,9 @@
   if (copy && !reduced) {
     const before = $('[data-copy-before]', copy), after = $('[data-copy-after]', copy);
     const pairs = [
-      ['Bem-vindo ao nosso site', 'Pão artesanal saindo do forno às 7h.'],
-      ['Somos uma empresa de qualidade', 'Seu corte agendado em poucos toques.'],
-      ['Clique aqui', 'Agendar minha avaliação']
+      ['Bem-vindo ao nosso site', 'Aula experimental de beach tennis, com raquete emprestada.'],
+      ['Somos uma empresa de qualidade', 'Cozinha planejada sob medida, do projeto à montagem.'],
+      ['Clique aqui', 'Pedir orçamento pelo WhatsApp']
     ];
     let pi = 0, running = false, token = 0;
     const wait = ms => new Promise(r => setTimeout(r, ms));

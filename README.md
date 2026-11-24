@@ -4,12 +4,14 @@
     <img src="assets/clickfocus-logo.svg" alt="Logotipo ClickFocus" width="540">
   </picture>
   <p><strong>A atenção do seu cliente onde realmente importa.</strong></p>
-  <p>Landing pages para apresentar pequenos negócios e facilitar o contato com potenciais clientes.</p>
+  <p>Landing pages para apresentar pequenos e médios negócios e facilitar o contato com potenciais clientes.</p>
 </div>
 
 # ClickFocus — site oficial e portfólio
 
-A **ClickFocus** é uma iniciativa especializada na criação de landing pages para pequenos negócios. Este repositório reúne o site institucional, a apresentação dos serviços e três projetos demonstrativos.
+A **ClickFocus** é uma iniciativa especializada na criação de landing pages para pequenos e médios negócios, com foco em **arenas de beach tennis** e **marcenarias**. Este repositório reúne o site institucional, a apresentação dos serviços e as prévias de cinco projetos demonstrativos.
+
+**Tom dos textos:** o público é formado por donos de negócio que não são da área de tecnologia. Os textos evitam jargão ("copy", "mobile-first", "briefing" etc.) e explicam em uma frase os termos inevitáveis, como domínio e hospedagem.
 
 ## Funcionalidades
 
@@ -37,11 +39,24 @@ A página demonstra na prática o conceito da marca — atenção onde importa:
 
 | Projeto | Conceito visual | Demonstração |
 | --- | --- | --- |
+| **Solare Beach Tennis** | Arena de beach tennis: areia, azul-marinho e laranja | pasta `../solare-beach-tennis` (publicar no Vercel) |
+| **Veio Marcenaria** | Marcenaria sob medida: madeira, verde musgo e café | pasta `../veio-marcenaria` (publicar no Vercel) |
 | **Serena Estética** | Marfim, areia, verde-sálvia e dourado discreto | [Ver site](https://serena-glow-appointments.vercel.app/) |
 | **Black Crown Barber Studio** | Barbearia premium, preto e dourado | [Ver site](https://black-crown-ten.vercel.app/) |
 | **VOLT Training Club** | Academia, preto e vermelho | [Ver site](https://volt-training-club.vercel.app/) |
 
-> **Transparência:** Serena, Black Crown e VOLT são **marcas fictícias** criadas como projetos de portfólio. Não são clientes atendidos, não representam casos de sucesso comercial e não comprovam resultados de marketing. As prévias na ClickFocus são ilustrativas.
+> **Transparência:** Solare, Veio, Serena, Black Crown e VOLT são **marcas fictícias** criadas como projetos de portfólio. Não são clientes atendidos, não representam casos de sucesso comercial e não comprovam resultados de marketing. As prévias na ClickFocus são ilustrativas.
+
+### Links das demonstrações Solare e Veio
+
+Os botões **Visitar site** dessas duas demonstrações ficam escondidos até a URL ser configurada. Depois de publicar cada pasta no Vercel, cole os endereços no início de `assets/app.js`:
+
+```js
+const DEMO_URLS = {
+  solare: 'https://SEU-ENDERECO.vercel.app/',
+  veio: 'https://SEU-ENDERECO.vercel.app/'
+};
+```
 
 ## Como funcionam os orçamentos
 
