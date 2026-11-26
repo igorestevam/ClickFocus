@@ -1020,3 +1020,6 @@ a.channel:hover > b { color: var(--lilac); transform: translate(3px, -3px); }
 .shot--split::after { content: '2 modelos'; position: absolute; right: 3cqw; top: 9cqw; z-index: 3; padding: 1.2cqw 2.4cqw; border-radius: 999px; background: #0C0C0C; color: #BE955C; font: 600 1.7cqw/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 0 .3cqw #BE955C; }
 .choice--veio .btn--solid { background: #C48D57; color: #2A1F17; }
 .choice--prumo .btn--solid { background: #BE955C; color: #0C0C0C; }
+.chooser__ctas .btn { max-width: 100%; height: auto; min-height: var(--bh, 52px); padding-block: 14px; white-space: normal; text-align: center; line-height: 1.3; }
+@media (max-width: 560px) { .chooser__ctas .btn { width: 100%; padding-inline: 20px; font-size: .95rem; } }
+.modal__dialog--wide > .proj__tag { padding-right: 52px; }
