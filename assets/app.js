@@ -10,7 +10,8 @@
   // (ex.: 'https://solare-beach-tennis.vercel.app/') e o botão "Visitar site" aparece sozinho.
   const DEMO_URLS = {
     solare: 'https://solare-beach-tennis.vercel.app',
-    veio: 'https://marcenaria-veio.vercel.app'
+    veio: 'https://marcenaria-veio.vercel.app',
+    prumo: 'https://prumo-planejados.vercel.app'
   };
   Object.entries(DEMO_URLS).forEach(([id, url]) => {
     if (!/^https?:\/\//.test(url)) return;

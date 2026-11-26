@@ -984,3 +984,39 @@ a.channel:hover > b { color: var(--lilac); transform: translate(3px, -3px); }
   .manifesto .w { opacity: 1; }
   .ticker__track { animation: none; }
 }
+
+/* ---------- Marcenaria: escolha entre dois modelos ---------- */
+.modal__dialog--wide { max-width: 1080px; }
+.modal__dialog--wide > .proj__tag { color: var(--dim); }
+.modal__dialog--wide > .modal__title { margin-top: 8px; padding-right: 48px; }
+.chooser__intro { margin-top: 10px; max-width: 64ch; }
+.chooser { display: grid; gap: 20px; margin-top: 26px; }
+@media (min-width: 820px) { .chooser { grid-template-columns: 1fr 1fr; } }
+.choice { display: grid; align-content: start; gap: 18px; padding: 16px; border: 1px solid var(--line-2); border-radius: var(--r-md); background: rgba(255, 255, 255, .02); transition: border-color .3s, transform .5s var(--ease); }
+.choice:hover { border-color: var(--violet-line); transform: translateY(-3px); }
+.choice__body { display: grid; gap: 10px; padding: 0 4px 4px; }
+.choice__k { font: 500 .68rem/1 var(--f-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--lilac); }
+.choice__t { font: 600 1.45rem/1.1 var(--f-display); letter-spacing: -.03em; }
+.choice .swatches { margin-top: 4px; }
+.choice .swatch { width: 28px; height: 28px; border-radius: 8px; }
+.choice__btn { justify-self: start; margin-top: 6px; }
+.chooser__ctas { margin-top: 22px; }
+
+.shot--prumo { background: #0C0C0C; color: #F3F1EC; font-family: 'Jost', var(--f-body); }
+.shot--prumo .shot__nav b { color: #BE955C; font-weight: 400; letter-spacing: .3em; }
+.shot--prumo .shot__hero { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 4cqw; padding: 1cqw 5cqw 0; }
+.shot--prumo .shot__k { color: #BE955C; }
+.shot--prumo .shot__h { font-size: 5.6cqw; font-weight: 300; line-height: 1; text-transform: uppercase; }
+.shot--prumo .shot__h em { font-style: normal; color: #BE955C; }
+.shot--prumo .shot__cta { border-radius: .4cqw; background: #1FA855; color: #fff; letter-spacing: .04em; }
+.shot__mosaic { display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 1fr 1fr; gap: 1cqw; aspect-ratio: .95; }
+.shot__mosaic i { border-radius: .4cqw; background: linear-gradient(160deg, #3A3A38, #151515); box-shadow: inset 0 0 0 1px rgba(190, 149, 92, .25); }
+.shot__mosaic i:first-child { grid-row: 1 / 3; background: linear-gradient(180deg, #2A2A28 0 58%, #6B4E2E 58% 62%, #1A1A1A 62%), #222; }
+.shot__mosaic i:nth-child(2) { background: repeating-linear-gradient(90deg, #8A6A44 0 .8cqw, #5A432A .8cqw 1.1cqw); }
+.shot__mosaic i:nth-child(3) { background: linear-gradient(135deg, #BE955C, #6B4E2E); }
+
+/* Card: metade Veio, metade Prumo */
+.shot--split { position: relative; }
+.shot--split::after { content: '2 modelos'; position: absolute; right: 3cqw; top: 9cqw; z-index: 3; padding: 1.2cqw 2.4cqw; border-radius: 999px; background: #0C0C0C; color: #BE955C; font: 600 1.7cqw/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 0 .3cqw #BE955C; }
+.choice--veio .btn--solid { background: #C48D57; color: #2A1F17; }
+.choice--prumo .btn--solid { background: #BE955C; color: #0C0C0C; }

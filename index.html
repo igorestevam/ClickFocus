@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Manrope:wght@500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Jost:wght@300;400&amp;family=Manrope:wght@500;600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet"/>
 <link href="assets/site.css?v=3" rel="stylesheet"/>
 <script>
@@ -310,8 +310,8 @@
 
       <article class="proj proj--veio">
         <div class="proj__media" data-open-project="veio">
-          <div class="browser"><div class="browser__bar"><span></span><span></span><span></span><em data-demo-host="veio">veio-marcenaria</em></div>
-            <div class="shot shot--veio">
+          <div class="browser"><div class="browser__bar"><span></span><span></span><span></span><em>2 modelos de marcenaria</em></div>
+            <div class="shot shot--veio shot--split">
               <div class="shot__nav"><b>Veio</b><span><i>Ambientes</i><i>Projetos</i><i>Orçamento</i></span></div>
               <div class="shot__hero">
                 <div class="shot__copy"><p class="shot__k">Marcenaria sob medida</p><p class="shot__h">Móveis sob medida, feitos para durar gerações.</p><span class="shot__cta">Pedir orçamento</span></div>
@@ -322,15 +322,14 @@
         </div>
         <div class="proj__info">
           <span class="proj__num">02 — 05</span>
-          <p class="proj__tag">Marcenaria sob medida</p>
-          <h3 class="proj__title">Veio Marcenaria</h3>
-          <p class="proj__desc">Visual elegante em tons de madeira, com ambientes atendidos, processo explicado passo a passo e um seletor que mostra como cada acabamento fica.</p>
-          <ul class="proj__chips"><li>Escolha de acabamento</li><li>Pedido de orçamento</li><li>Versão mobile</li></ul>
+          <p class="proj__tag">Marcenaria · 2 modelos</p>
+          <h3 class="proj__title">Veio &amp; Prumo</h3>
+          <p class="proj__desc">Duas propostas para marcenarias: a Veio, acolhedora em tons de madeira, e a Prumo, sofisticada em preto e dourado, com galeria de projetos e orçamento direto no WhatsApp.</p>
+          <ul class="proj__chips"><li>2 modelos para escolher</li><li>Galeria de projetos</li><li>Orçamento no WhatsApp</li></ul>
           <div class="proj__actions">
-            <button aria-haspopup="dialog" class="btn btn--solid" data-project="veio" type="button">Ver detalhes</button>
-            <a class="proj__live" data-demo-link="veio" hidden="" rel="noopener noreferrer" target="_blank">Visitar site <i aria-hidden="true" class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <button aria-haspopup="dialog" class="btn btn--solid" data-project="veio" type="button">Escolher modelo</button>
           </div>
-          <p class="proj__note">Prévia ilustrativa do conceito.</p>
+          <p class="proj__note">Clique para ver os dois modelos.</p>
         </div>
       </article>
 
@@ -475,11 +474,14 @@
 </div>
 
 <div aria-hidden="true" aria-labelledby="project-title-veio" aria-modal="true" class="modal" id="project-veio" role="dialog">
-  <div class="modal__dialog">
+  <div class="modal__dialog modal__dialog--wide">
     <button aria-label="Fechar projeto" class="modal__close" type="button"><i aria-hidden="true" class="fa-solid fa-xmark"></i></button>
-    <div class="modal__grid">
-      <div class="modal__preview">
-        <div class="browser"><div class="browser__bar"><span></span><span></span><span></span></div>
+    <p class="proj__tag">Marcenaria e móveis planejados</p>
+    <h3 class="modal__title" id="project-title-veio">Escolha o modelo que quer ver</h3>
+    <p class="text chooser__intro">Dois estilos diferentes para o mesmo tipo de negócio. Os dois mostram os projetos, explicam os diferenciais e levam o cliente direto para o orçamento no WhatsApp.</p>
+    <div class="chooser">
+      <article class="choice choice--veio">
+        <div class="browser"><div class="browser__bar"><span></span><span></span><span></span><em data-demo-host="veio">veio-marcenaria</em></div>
           <div class="shot shot--veio">
             <div class="shot__nav"><b>Veio</b><span><i>Ambientes</i><i>Projetos</i><i>Orçamento</i></span></div>
             <div class="shot__hero">
@@ -488,37 +490,47 @@
             </div>
           </div>
         </div>
-        <p class="small">Representação ilustrativa. Visite o site demonstrativo para ver a página completa.</p>
-        <div class="swatches">
-          <span aria-label="Papel" class="swatch" role="img" style="background: #F5F0E8" title="Papel"></span>
-          <span aria-label="Carvalho" class="swatch" role="img" style="background: #C48D57" title="Carvalho"></span>
-          <span aria-label="Verde musgo" class="swatch" role="img" style="background: #6E7A57" title="Verde musgo"></span>
-          <span aria-label="Café" class="swatch" role="img" style="background: #2A1F17" title="Café"></span>
+        <div class="choice__body">
+          <p class="choice__k">Modelo 1 · acolhedor</p>
+          <h4 class="choice__t">Veio Marcenaria</h4>
+          <p class="text">Tons de madeira, verde musgo e letras serifadas. Ideal para marcenaria de família que quer passar tradição e capricho.</p>
+          <ul class="deliverables">
+            <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Ambientes atendidos e processo em 5 etapas</span></li>
+            <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Seletor de acabamento que muda o móvel na hora</span></li>
+            <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Pedido de orçamento com mensagem pronta</span></li>
+          </ul>
+          <div class="swatches"><span class="swatch" style="background: #F5F0E8" title="Papel"></span><span class="swatch" style="background: #C48D57" title="Carvalho"></span><span class="swatch" style="background: #6E7A57" title="Verde musgo"></span><span class="swatch" style="background: #2A1F17" title="Café"></span></div>
+          <a class="btn btn--solid choice__btn" data-demo-link="veio" hidden="" rel="noopener noreferrer" target="_blank">Ver o site da Veio ↗</a>
         </div>
-        <p class="small">Paleta do conceito visual demonstrativo.</p>
-      </div>
-      <div class="modal__info">
-        <p class="proj__tag">Marcenaria sob medida</p>
-        <h3 class="modal__title" id="project-title-veio">Veio Marcenaria</h3>
-        <p class="text">Página elegante em tons de madeira para uma marcenaria fictícia que faz cozinhas, quartos, home office e painéis.</p>
-        <h4 class="modal__label">Objetivo do conceito</h4>
-        <p class="text">Passar confiança para quem vai investir em móveis planejados: mostrar o processo, os acabamentos e facilitar o pedido de orçamento.</p>
-        <h4 class="modal__label">Visual</h4>
-        <p class="text">Tons de madeira, verde musgo e café, com letras serifadas, ilustrações de móveis e textura de veio feita em código.</p>
-        <h4 class="modal__label">O que a demonstração tem</h4>
-        <ul class="deliverables">
-          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Ambientes atendidos e processo em 5 etapas</span></li>
-          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Seletor de acabamento que muda o móvel na hora</span></li>
-          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Galeria de projetos ilustrativos</span></li>
-          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Pedido de orçamento com mensagem pronta para o WhatsApp</span></li>
-          <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Versão mobile completa</span></li>
-        </ul>
-        <div class="modal__ctas">
-          <a class="btn btn--ghost" data-demo-link="veio" hidden="" rel="noopener noreferrer" target="_blank">Visitar site publicado ↗</a>
-          <a class="btn btn--primary" data-close-modal="" href="#contato">Quero algo assim</a>
+      </article>
+      <article class="choice choice--prumo">
+        <div class="browser"><div class="browser__bar"><span></span><span></span><span></span><em data-demo-host="prumo">prumo-planejados</em></div>
+          <div class="shot shot--prumo">
+            <div class="shot__nav"><b>Prumo</b><span><i>Projetos</i><i>Diferenciais</i><i>Orçamento</i></span></div>
+            <div class="shot__hero">
+              <div class="shot__copy"><p class="shot__k">Móveis planejados</p><p class="shot__h">Seu ambiente, <em>no milímetro.</em></p><span class="shot__cta">Orçamento no WhatsApp</span></div>
+              <div class="shot__mosaic"><i></i><i></i><i></i></div>
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="choice__body">
+          <p class="choice__k">Modelo 2 · sofisticado</p>
+          <h4 class="choice__t">Prumo Planejados</h4>
+          <p class="text">Preto, dourado e branco, com letras finas e fotos grandes. Ideal para móveis planejados de alto padrão.</p>
+          <ul class="deliverables">
+            <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Galeria de projetos com filtro por ambiente</span></li>
+            <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Diferenciais claros e comparação com móvel pronto</span></li>
+            <li><i aria-hidden="true" class="fa-solid fa-check"></i><span>Orçamento em 30 segundos direto no WhatsApp</span></li>
+          </ul>
+          <div class="swatches"><span class="swatch" style="background: #0C0C0C" title="Preto"></span><span class="swatch" style="background: #BE955C" title="Dourado"></span><span class="swatch" style="background: #F3F1EC" title="Off-white"></span><span class="swatch" style="background: #1FA855" title="WhatsApp"></span></div>
+          <a class="btn btn--solid choice__btn" data-demo-link="prumo" hidden="" rel="noopener noreferrer" target="_blank">Ver o site da Prumo ↗</a>
+        </div>
+      </article>
     </div>
+    <div class="modal__ctas chooser__ctas">
+      <a class="btn btn--primary" data-close-modal="" href="#contato">Quero um site assim para a minha marcenaria</a>
+    </div>
+    <p class="small">Representações ilustrativas. Os dois negócios são fictícios.</p>
   </div>
 </div>
 
@@ -714,7 +726,7 @@
       <div class="faq__item rv"><button aria-controls="faq-panel-5" aria-expanded="false" class="faq__trigger" id="faq-trigger-5" type="button"><small>05</small><span>O que é domínio e eu preciso ter um?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-5" class="faq__panel" id="faq-panel-5" role="region"><div><p>Domínio é o endereço do site, como suaarena.com.br. Não é obrigatório para começar, mas passa mais confiança. O registro e a renovação são pagos à parte, e podemos ajudar a configurar se isso estiver no orçamento.</p></div></div></div>
       <div class="faq__item rv"><button aria-controls="faq-panel-6" aria-expanded="false" class="faq__trigger" id="faq-trigger-6" type="button"><small>06</small><span>Dá para colocar um botão de WhatsApp?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-6" class="faq__panel" id="faq-panel-6" role="region"><div><p>Sim. O botão abre uma conversa com o seu número, e a mensagem pode já ir escrita. Agendamento automático, sistemas de cadastro de clientes ou outras automações são avaliados e orçados à parte.</p></div></div></div>
       <div class="faq__item rv"><button aria-controls="faq-panel-7" aria-expanded="false" class="faq__trigger" id="faq-trigger-7" type="button"><small>07</small><span>Uma landing page garante mais vendas ou clientes?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-7" class="faq__panel" id="faq-panel-7" role="region"><div><p>Não. Uma boa página ajuda o cliente a entender o que você oferece e facilita o contato, mas o resultado também depende do seu serviço, do preço, da divulgação e de outros fatores. Não prometemos número de visitas, contatos ou vendas.</p></div></div></div>
-      <div class="faq__item rv"><button aria-controls="faq-panel-8" aria-expanded="false" class="faq__trigger" id="faq-trigger-8" type="button"><small>08</small><span>Os projetos do portfólio são de clientes reais?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-8" class="faq__panel" id="faq-panel-8" role="region"><div><p>Não. Solare Beach Tennis, Veio Marcenaria, Serena Estética, Black Crown Barber Studio e VOLT Training Club são negócios fictícios, criados para mostrar estilos diferentes de página. Não representam clientes atendidos, resultados ou depoimentos reais.</p></div></div></div>    </div>
+      <div class="faq__item rv"><button aria-controls="faq-panel-8" aria-expanded="false" class="faq__trigger" id="faq-trigger-8" type="button"><small>08</small><span>Os projetos do portfólio são de clientes reais?</span><i aria-hidden="true" class="faq__icon"></i></button><div aria-labelledby="faq-trigger-8" class="faq__panel" id="faq-panel-8" role="region"><div><p>Não. Solare Beach Tennis, Veio Marcenaria, Prumo Planejados, Serena Estética, Black Crown Barber Studio e VOLT Training Club são negócios fictícios, criados para mostrar estilos diferentes de página. Não representam clientes atendidos, resultados ou depoimentos reais.</p></div></div></div>    </div>
   </div>
 </section>
 
